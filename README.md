@@ -8,4 +8,4 @@ Exploring C++ features, new and old.
 
 ### References 
 
-- [C++20 Standard Working Draft](.\LocalResources\CppStd.pdf)
+- [C++20 Standard Working Draft](LocalResources/CppStd.pdf)
