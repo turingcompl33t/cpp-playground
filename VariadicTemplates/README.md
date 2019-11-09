@@ -1,3 +1,0 @@
-### Variadic Templates
-
-### References
