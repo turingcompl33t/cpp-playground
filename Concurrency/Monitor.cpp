@@ -40,7 +40,7 @@ int main()
     {
         v.push_back(std::async(std::launch::async, [&,i]() {
             
-            sync_cout([=](std::ostream& cout){
+            sync_cout([=](std::ostream& cout) {
                 cout << "Hello #1 from thread: " << std::to_string(i) << '\n';
             });
 

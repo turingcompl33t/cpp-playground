@@ -1,0 +1,1 @@
+cl /EHsc /nologo /FeClient.exe Client.cpp Tracer.cpp
