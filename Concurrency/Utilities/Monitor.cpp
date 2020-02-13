@@ -16,7 +16,8 @@ private:
     std::mutex m;
 public:
     Monitor(T t_ = T{})
-        : t{t_} {}
+        : t{t_} 
+    {}
 
     template<typename F>
     auto operator()(F f) -> decltype(f(t))

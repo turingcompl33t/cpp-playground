@@ -8,6 +8,4 @@ int main()
 {
     auto n = std::thread::hardware_concurrency();
     std::cout << n << " concurrent threads supported by implementation" << std::endl;
-
-    return 0;
 }
