@@ -2,7 +2,7 @@
 // Demo of std::any.
 //
 // Build
-//  cl /EHsc /nologo /std:c++17 /W4 /I c:\Dev\Boost /I c:\Dev\Catch Any.cpp
+//  cl /EHsc /nologo /std:c++17 /W4 /I c:\Dev\Boost /I c:\Dev\Catch2 Any.cpp
 
 #define CATCH_CONFIG_MAIN
 #include <catch.hpp>

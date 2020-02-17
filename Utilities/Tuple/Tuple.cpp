@@ -2,7 +2,7 @@
 // Demo of std::tuple.
 //
 // Build
-//  cl /EHsc /nologo /std:c++17 /W4 /I c:\Dev\Boost /I c:\Dev\Catch Tuple.cpp
+//  cl /EHsc /nologo /std:c++17 /W4 /I c:\Dev\Boost /I c:\Dev\Catch2 Tuple.cpp
 
 #define CATCH_CONFIG_MAIN
 #include <catch.hpp>
