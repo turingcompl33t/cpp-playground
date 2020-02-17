@@ -5,7 +5,8 @@
             "includePath": [
                 "${workspaceFolder}/**",
                 "C:/Dev/Boost",
-                "C:/Dev/Catch"
+                "C:/Dev/Catch",
+                "C:/Dev/FmtLib/include"
             ],
             "defines": [
                 "_DEBUG",
