@@ -1,5 +1,8 @@
 // RefWrapper.cpp
 // Demo of std::reference_wrapper.
+//
+// Build
+//  cl /EHsc /nologo /std:c++17 /W4 RefWrapper.cpp
 
 #include <list>
 #include <random>
