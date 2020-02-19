@@ -15,12 +15,12 @@ Building and utilizing these libraries each involve their own set of "gotchas" -
 
 Get up and running with the Boost libraries by following the procedure below:
 
-- Download the latest Boost release from the [Boost website](https://www.boost.org/)
-- Extract the contents of the archive your desired location
+- Download the latest Boost release from the [Boost website](https://www.boost.org/) and extract the contents of the archive your desired location
+- Alternatively, clone the [Boost MetaRepo](https://github.com/boostorg/boost) recursively to your desired location (e.g. `git clone --recursive ...`)
 - Build the Boost libraries; navigate to the top-level directory of the extracted Boost archive and run:
-    - `bootstrap`
-    - `.\b2` or `.\b2 --build-type=complete`
-    The latter version of the second command is necessary if you plan to statically link with Boost. The build process will take some time.
+    - `bootstrap`: bootstrap the Boost build system
+    - `.\b2` OR `.\b2 --build-type=complete`: build Boost libraries; the latter version of the second command is necessary if you plan to statically link with Boost; the build process will take some time
+    - `.\b2 headers`: build just the Boost headers
 - Modify the compiler's include path to include the base directory for the Boost project; when compiling from the command line (as the programs in this project assume) this may be accomplished via the `/I` compiler option (e.g. `/I path/to/boost`)
 - Modify the linker's search path to include the directory where Boost.Build generated the build outputs during the library build (should be `/Boost/stage/lib`) via the `/LIBPATH` linker option (e.g. `/link /LIBPATH:path/to/boost/stage/lib`)
 - If your compiler supports auto-linking (like MSVC) then this is all that is required as the linker automatically selects the correct library against which to link and resolves it for us (i.e. there is no need to specify the name of the library we want to link against via something like a `#pragma comment()`)
