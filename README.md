@@ -7,7 +7,7 @@ Exploring C++ features, new and old.
 Some of the examples in this repository make use of the following external C++ libraries:
 - Boost
 - Catch
-- {fmt} (fmtlib)
+- {fmt}
 
 Building and utilizing these libraries each involve their own set of "gotchas" - below I have attempted to record make note of these in order to simplify recreating the programs in this repository.
 
@@ -16,7 +16,7 @@ Building and utilizing these libraries each involve their own set of "gotchas" -
 Get up and running with the Boost libraries by following the procedure below:
 
 - Download the latest Boost release from the [Boost website](https://www.boost.org/) and extract the contents of the archive your desired location
-- Alternatively, clone the [Boost MetaRepo](https://github.com/boostorg/boost) recursively to your desired location (e.g. `git clone --recursive ...`)
+- Alternatively, clone the [Boost metarepo](https://github.com/boostorg/boost) recursively to your desired location (e.g. `git clone --recursive ...`)
 - Build the Boost libraries; navigate to the top-level directory of the extracted Boost archive and run:
     - `bootstrap`: bootstrap the Boost build system
     - `.\b2` OR `.\b2 --build-type=complete`: build Boost libraries; the latter version of the second command is necessary if you plan to statically link with Boost; the build process will take some time
