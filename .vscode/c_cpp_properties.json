@@ -6,7 +6,8 @@
                 "${workspaceFolder}/**",
                 "C:/Dev/Boost",
                 "C:/Dev/Catch2",
-                "C:/Dev/FmtLib/include"
+                "C:/Dev/FmtLib/include",
+                "c:/Dev/Rangev3/include"
             ],
             "defines": [
                 "_DEBUG",
