@@ -1,3 +1,10 @@
+// to_string.cpp
+// Demo of basic variadic template usage to convert arbitrary types
+// (assuming they support input operator<<) to strings.
+//
+// Build
+//  cl /EHsc /nologo /std:c++17 /W4 to_string.cpp
+
 #include <vector>
 #include <sstream>
 #include <iostream>
