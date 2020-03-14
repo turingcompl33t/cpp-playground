@@ -1,4 +1,4 @@
-// NumberPrinter.cpp
+// number_printer.cpp
 
 #include <iostream>
 #include <type_traits>

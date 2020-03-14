@@ -59,11 +59,34 @@ public:
     }
 };
 
-int main()
+Tracer make_tracer()
+{
+    return Tracer{};
+}
+
+template <typename T>
+void use(T)
+{
+    std::cout << "use()\n";
+}
+
+void demo_construction()
 {
     auto t1 = Tracer{};
     auto t2 = Tracer{t1};
-    auto t3 = Tracer{std::move(t1)};
+    auto t3 = t2;
+    auto t4 = Tracer{std::move(t1)};
+    auto t5 = std::move(t2);
+}
 
-    return 0;
+void demo_guaranteed_copy_elision()
+{
+    use(Tracer{});
+    use(make_tracer());
+
+}
+
+int main()
+{
+    demo_guaranteed_copy_elision();
 }

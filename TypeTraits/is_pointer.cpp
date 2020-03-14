@@ -1,4 +1,4 @@
-// IsPointer.cpp
+// is_pointer.cpp
 
 #include <iostream>
 

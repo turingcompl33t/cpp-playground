@@ -1,4 +1,4 @@
-// IsSame.cpp
+// is_same.cpp
 
 #include <iostream>
 #include <type_traits>
