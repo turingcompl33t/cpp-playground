@@ -1,41 +1,69 @@
-// Tracer.cpp
-// Object lifetime tracer.
+// tracer.cpp
+// Simple object lifetime tracer.
+//
+// Build
+//  cl /EHsc /nologo /W4 /std:c++17 tracer.cpp
 
 #include <string>
+#include <random>
 #include <iostream>
 
-#include "tracer.h"
+std::mt19937 g_gen{};
+std::uniform_int_distribution<> g_dist{0, 1000};
 
-Tracer::Tracer()
+class Tracer
 {
-    std::cout << "Tracer::Tracer()" << std::endl;
-}
+    std::uniform_int<int>::result_type id;
 
-Tracer::~Tracer()
+public:
+    explicit Tracer() : id{g_dist(g_gen)}
+    {
+        std::cout << '[' << id << ']'; 
+        std::cout << " Tracer()\n";
+    }
+
+    ~Tracer()
+    {
+        std::cout << '[' << id << ']'; 
+        std::cout << " ~Tracer()\n";
+    }
+
+    // copy constructor
+    Tracer(Tracer const&) : id{g_dist(g_gen)}
+    {
+        std::cout << '[' << id << ']'; 
+        std::cout << " Tracer(Tracer const&)\n";
+    }
+
+    // copy assignment operator
+    Tracer& operator=(const Tracer&)
+    {
+        id = g_dist(g_gen);
+        std::cout << '[' << id << ']'; 
+        std::cout << " operator=(Tracer const&)\n";
+    }
+
+    // move constructor
+    Tracer(Tracer&&) : id{g_dist(g_gen)}
+    {
+        std::cout << '[' << id << ']'; 
+        std::cout << " Tracer(Tracer&&)\n"; 
+    }
+
+    // move assignment operator
+    Tracer& operator=(Tracer &&)
+    {
+        id = g_dist(g_gen);
+        std::cout << '[' << id << ']'; 
+        std::cout << " operator=(Tracer&&)\n";
+    }
+};
+
+int main()
 {
-    std::cout << "Tracer::~Tracer()" << std::endl;
-}
+    auto t1 = Tracer{};
+    auto t2 = Tracer{t1};
+    auto t3 = Tracer{std::move(t1)};
 
-Tracer::Tracer(const Tracer& rhs)
-{
-    std::cout << "Tracer::Tracer(const Tracer& rhs)" << std::endl;
-}
-
-Tracer& Tracer::operator=(const Tracer& rhs)
-{
-    std::cout << "Tracer::operator=(const Tracer& rhs)" << std::endl;
-    
-    return *this;
-}
-
-Tracer::Tracer(Tracer&& rhs)
-{
-    std::cout << "Tracer::Tracer(Tracer&& rhs)" << std::endl;
-}
-
-Tracer& Tracer::operator=(Tracer&& rhs)
-{
-    std::cout << "Tracer::operator=(Tracer&& rhs)" << std::endl;
-
-    return *this;
+    return 0;
 }
