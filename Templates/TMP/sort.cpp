@@ -1,8 +1,14 @@
-// Sort.cpp
+// sort.cpp
 // Compile-time integer array sort via TMP.
+//
+// Build
+//  cl /EHsc /nologo /W4 /std:c++17 /I C:\Dev\Catch2 sort.cpp
 
+#define CATCH_CONFIG_MAIN
+#include <catch.hpp>
+
+#include <string>
 #include <typeinfo>
-#include <iostream>
 
 // Ints primary template
 template <int... Vals> struct Ints {};
@@ -132,7 +138,11 @@ public:
 template <int... Vals> struct Sort
     : public SortHelper<Ints<Vals...>> {};
 
-int main()
-{
-    std::cout << typeid(Sort<8, 2, 5, 1, 7, 9, 3, 2, 0>::type).name() << std::endl;
+TEST_CASE("array is sorted at compile time")
+{   
+    // NOTE: this is a crappy way to test correctness
+    auto s = std::string{typeid(Sort<4, 3, 2, 1, 0>::type).name()};
+    auto e = std::string{"struct Ints<0,1,2,3,4>"};  // expected
+    
+    REQUIRE(s == e);
 }

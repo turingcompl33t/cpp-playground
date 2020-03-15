@@ -1,8 +1,14 @@
-// ValidForType.cpp
+// valid_for_type.cpp
 // "Expressive TMP" from Fluent C++ blog.
+//
+// Build
+//  cl /EHsc /nologo /W4 /std:c++17 /I C:\Dev\Catch2 valid_for_type.cpp
 
+#define CATCH_CONFIG_MAIN
+#include <catch.hpp>
+
+#include <string>
 #include <type_traits>
-#include <iostream>
 
 template <typename ...>
 using try_to_instantiate = void;
@@ -25,11 +31,11 @@ using decrement_expression = decltype(--std::declval<T&>());
 template <typename T>
 using is_decrementable = is_detected<T, decrement_expression>;
 
-int main()
+TEST_CASE("type properties are determined at compile time")
 {
-    std::cout << std::boolalpha;
-    std::cout << is_incrementable<int>::value << '\n';
-    std::cout << is_incrementable<std::string>::value << '\n';
-    std::cout << is_decrementable<int>::value << '\n';
-    std::cout << is_decrementable<std::string>::value << '\n';
+    REQUIRE(is_incrementable<int>::value);
+    REQUIRE_FALSE(is_incrementable<std::string>::value);
+
+    REQUIRE(is_decrementable<int>::value);
+    REQUIRE_FALSE(is_decrementable<std::string>::value);
 }
