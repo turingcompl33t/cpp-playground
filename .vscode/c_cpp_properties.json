@@ -7,7 +7,7 @@
                 "C:/Dev/Boost",
                 "C:/Dev/Catch2",
                 "C:/Dev/FmtLib/include",
-                "c:/Dev/Rangev3/include"
+                "c:/Dev/Rangev3/Include"
             ],
             "defines": [
                 "_DEBUG",
