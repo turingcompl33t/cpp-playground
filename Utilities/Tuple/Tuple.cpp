@@ -1,45 +1,93 @@
-// Tuple.cpp
+// tuple.cpp
 // Demo of std::tuple.
 //
 // Build
-//  cl /EHsc /nologo /std:c++17 /W4 /I c:\Dev\Boost /I c:\Dev\Catch2 Tuple.cpp
+//  cl /EHsc /nologo /std:c++17 /W4 /I c:\Dev\Catch2 tuple.cpp
 
 #define CATCH_CONFIG_MAIN
 #include <catch.hpp>
 
 #include <utility>
 
-struct Type1
+struct X
 {
-    char const* identifier_;
+    X(int id) : m_id{ id }
+    {}
+
+    int get_id() const noexcept
+    {
+        return m_id;
+    }
+private:
+    int const m_id;
 };
 
-struct Type2
+struct Y
 {
-    char const* identifier_;
+    Y(int id) : m_id{ id }
+    {}
+
+    int get_id() const noexcept
+    {
+        return m_id;
+    }
+private:
+    int const m_id;
 };
 
-struct Type3
+struct Z
 {
-    char const* identifier_;
+    Z(int id) : m_id{ id }
+    {}
+
+    int get_id() const noexcept
+    {
+        return m_id;
+    }
+private:
+    int const m_id;
 };
 
-Type1 instance_1{ "type_1" };
-Type2 instance_2{ "type_2" };
-Type3 instance_3{ "type_3" };
+std::tuple<int, int, int> some_function()
+{
+    return std::make_tuple(1, 2, 3);
+}
 
 TEST_CASE("std::tuple permits access to members with std::get")
 {
-    using triple = std::tuple<Type1, Type2, Type3>;
+    using triple = std::tuple<X, Y, Z>;
 
-    triple trio{instance_1, instance_2, instance_3};
+    auto x = X{1};
+    auto y = Y{2};
+    auto z = Z{3};
 
-    REQUIRE(std::get<0>(trio).identifier_ == instance_1.identifier_);
-    REQUIRE(std::get<Type1>(trio).identifier_ == instance_1.identifier_);
+    auto trio = triple{1, 2, 3};
 
-    REQUIRE(std::get<1>(trio).identifier_ == instance_2.identifier_);
-    REQUIRE(std::get<Type2>(trio).identifier_ == instance_2.identifier_);
+    REQUIRE(std::get<0>(trio).get_id() == x.get_id());
+    REQUIRE(std::get<X>(trio).get_id() == x.get_id());
 
-    REQUIRE(std::get<2>(trio).identifier_ == instance_3.identifier_);
-    REQUIRE(std::get<Type3>(trio).identifier_ == instance_3.identifier_);
+    REQUIRE(std::get<1>(trio).get_id() == y.get_id());
+    REQUIRE(std::get<Y>(trio).get_id() == y.get_id());
+
+    REQUIRE(std::get<2>(trio).get_id() == z.get_id());
+    REQUIRE(std::get<Z>(trio).get_id() == z.get_id());
+}
+
+TEST_CASE("std::tuple (with C++14) supports accessing members with std::tie()")
+{
+    int x, y, z;
+    std::tie(x, y, z) = some_function();
+
+    REQUIRE(x == 1);
+    REQUIRE(y == 2);
+    REQUIRE(z == 3);
+}
+
+TEST_CASE("std::tuple (with C++17) supports structured bindings")
+{
+    auto [x, y, z] = some_function();
+
+    REQUIRE(x == 1);
+    REQUIRE(y == 2);
+    REQUIRE(z == 3);
 }
