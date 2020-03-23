@@ -1,5 +1,5 @@
 // set.cpp
-// Demo of basic properties and usage of std::set.
+// Demo of basic properties and usage of std::set and std::multiset.
 //
 // Build
 //  cl /EHsc /nologo /std:c++17 /W4 /I c:\Dev\Catch2 set.cpp
