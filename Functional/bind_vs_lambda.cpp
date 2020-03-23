@@ -1,8 +1,8 @@
-// BindVsLambda.cpp
+// bind_vs_lambda.cpp
 // Quick comparison of using std::bind versus lambdas.
 //
 // Build
-//  cl /EHsc /nologo /std:c++17 /W4 /I c:\Dev\Catch2 BindVsLambda.cpp
+//  cl /EHsc /nologo /std:c++17 /W4 /I c:\Dev\Catch2 bind_vs_lambda.cpp
 
 #define CATCH_CONFIG_MAIN
 #include <catch.hpp>

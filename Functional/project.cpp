@@ -1,4 +1,5 @@
-// Project.cpp
+// project.cpp
+//
 // Implementation of a "projection idiom" that generalizes 
 // the concept of applying a function to every element in a container.
 //
@@ -7,11 +8,14 @@
 //  (https://www.fluentcpp.com/2020/02/07/transform-adaptor-equivalent-in-cpp/)
 //
 // Build
-//  cl /EHsc /nologo /std::c++14 /W4 Project.cpp
+//  cl /EHsc /nologo /std:c++14 /W4 /I C:\Dev\Catch2 project.cpp
 //
 // NOTE: std::result_of_t is deprecated in C++17 in favor of
 // std::invoke_result_t, but when I replace std::result_of_t with
 // std::invoke_result_t and compile under C++17, the build breaks
+
+#define CATCH_CONFIG_MAIN
+#include <catch.hpp>
 
 #include <cmath>
 #include <vector>
@@ -57,18 +61,19 @@ auto project(Function fn)
     };
 }
 
-
-int main()
+TEST_CASE("project() projects function application onto container")
 {
     auto const points = std::vector<Point>{ {3,4}, {6,8}, {9,12} };
 
+    // project the norm() function onto a container;
+    // returns a function object (lambda) 
     auto compute_norms = project(norm);
 
     auto norms = compute_norms(points);
 
-    for (auto const& n : norms)
-    {
-        std::cout << n << ' ';
-    }
-    std::cout << '\n';
+    REQUIRE(norms.size() == 3);
+
+    REQUIRE(norms[0] == norm(points[0]));
+    REQUIRE(norms[1] == norm(points[1]));
+    REQUIRE(norms[2] == norm(points[2]));
 }

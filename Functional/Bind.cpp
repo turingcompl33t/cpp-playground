@@ -1,8 +1,8 @@
-// Bind.cpp
+// bind.cpp
 // Basic usage of std::bind.
 //
 // Build
-//  cl /EHsc /nologo /std:c++17 /W4 /I c:\Dev\Catch2 Bind.cpp
+//  cl /EHsc /nologo /std:c++17 /W4 /I c:\Dev\Catch2 bind.cpp
 
 #define CATCH_CONFIG_MAIN
 #include <catch.hpp>
