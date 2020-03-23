@@ -1,8 +1,11 @@
-// HelloConcepts.cpp
+// hello_concepts.cpp
 // Test of concept support in MSVC.
 //
 // Build
-//  cl /EHsc /nologo /W4 /std:c++latest HelloConcepts.cpp
+//  cl /EHsc /nologo /W4 /std:c++latest /I C:\Dev\Catch2 hello_concepts.cpp
+
+#define CATCH_CONFIG_MAIN
+#include <catch.hpp>
 
 #include <iostream>
 #include <type_traits>
@@ -28,13 +31,14 @@ T improved_syntax(T a, T b)
 //     return a + b;
 // }
 
-int main()
+TEST_CASE("concepts with original syntax")
 {
-    std::cout << "Hello, Concepts!\n";
-    
-    auto res1 = original_syntax(1.2, 3.4);
-    auto res2 = improved_syntax(1.2, 3.4);
+    auto r = original_syntax(1.2, 3.4);
+    REQUIRE(r == 4.6);
+}
 
-    std::cout << res1 << '\n';
-    std::cout << res2 << '\n';
+TEST_CASE("concepts with improved syntax")
+{
+    auto r = improved_syntax(1.2, 3.4);
+    REQUIRE(r == 4.6);
 }
