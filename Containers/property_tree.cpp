@@ -1,8 +1,8 @@
-// PropertyTree.cpp
+// property_tree.cpp
 // Demo of basic properties and usage of boost::property_tree::ptree.
 //
 // Build
-// cl /EHsc /nologo /std:c++17 /W4 /I c:\Dev\Boost /I c:\Dev\Catch2 PropertyTree.cpp
+// cl /EHsc /nologo /std:c++17 /W4 /I c:\Dev\Boost /I c:\Dev\Catch2 property_tree.cpp
 
 #define CATCH_CONFIG_MAIN
 #include <catch.hpp>
