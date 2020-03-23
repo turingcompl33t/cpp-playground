@@ -14,7 +14,7 @@
 
 TEST_CASE("std::vector supports default construction")
 {
-    std::vector<int> vec{};
+    auto vec = std::vector<int>{};
     REQUIRE(vec.empty());
 }
 
@@ -22,14 +22,14 @@ TEST_CASE("std::vector may be constructed with")
 {
     SECTION("braced initializer (initializer list)")
     {
-        std::vector<int> vec{5, 8};
+        auto vec = std::vector<int>{5, 8};
         REQUIRE(vec[0] == 5);
         REQUIRE(vec[1] == 8);
     }
 
     SECTION("fill construction")
     {
-        std::vector<int> vec(5, 8);
+        auto vec = std::vector<int>(5, 8);
         REQUIRE(vec.size() == 5);
         REQUIRE(vec[0] == 8);
         REQUIRE(vec[4] == 8);
@@ -37,8 +37,8 @@ TEST_CASE("std::vector may be constructed with")
 
     SECTION("iterators")
     {
-        std::array<int, 4> array{0, 1, 2, 3};
-        std::vector<int> vec(array.begin(), array.end());
+        auto array = std::array<int, 4>{0, 1, 2, 3};
+        auto vec = std::vector<int>{array.begin(), array.end()};
         REQUIRE(vec.size() == array.size());
         REQUIRE(vec[0] == 0);
         REQUIRE(vec[1] == 1);
@@ -48,8 +48,8 @@ TEST_CASE("std::vector may be constructed with")
 
     SECTION("copy construction")
     {
-        std::vector<int> src{0, 1, 2, 3};
-        std::vector<int> dst(src);
+        auto src = std::vector<int>{0, 1, 2, 3};
+        auto dst = std::vector<int>{src};
         
         REQUIRE(dst.size() == src.size());
         
@@ -61,8 +61,9 @@ TEST_CASE("std::vector may be constructed with")
 
     SECTION("move construction")
     {
-        std::vector<int> src{0, 1, 2, 3};
-        std::vector<int> dst(std::move(src));
+        auto src = std::vector<int>{0, 1, 2, 3};
+        auto dst = std::vector<int>{std::move(src)};
+
         REQUIRE(dst.size() == 4);
         REQUIRE(dst[0] == 0);
         REQUIRE(dst[1] == 1);
@@ -75,8 +76,8 @@ TEST_CASE("std::vector supports full copy / move semantics")
 {
     SECTION("copy assignment")
     {
-        std::vector<int> src{0, 1, 2, 3};
-        std::vector<int> dst{4, 5, 6, 7};
+        auto src = std::vector<int>{0, 1, 2, 3};
+        auto dst = std::vector<int>{4, 5, 6, 7};
 
         REQUIRE(dst[0] == 4);
         REQUIRE(dst[1] == 5);
@@ -93,8 +94,8 @@ TEST_CASE("std::vector supports full copy / move semantics")
 
     SECTION("move assignment")
     {
-        std::vector<int> src{0, 1, 2, 3};
-        std::vector<int> dst{4, 5, 6, 7};
+        auto src = std::vector<int>{0, 1, 2, 3};
+        auto dst = std::vector<int>{4, 5, 6, 7};
 
         REQUIRE(dst[0] == 4);
         REQUIRE(dst[1] == 5);
@@ -112,11 +113,11 @@ TEST_CASE("std::vector supports full copy / move semantics")
 
 TEST_CASE("std::vector exposes size management methods")
 {
-    std::vector<std::array<uint8_t, 1024>> kb_store{};
+    auto kb_store = std::vector<std::array<uint8_t, 1024>>{};
     REQUIRE(kb_store.max_size() > 0);
     REQUIRE(kb_store.empty());
 
-    size_t elements{1024};
+    auto elements = size_t{1024};
     kb_store.reserve(elements);
     REQUIRE(kb_store.empty());
     REQUIRE(kb_store.capacity() == elements);
@@ -138,7 +139,7 @@ TEST_CASE("std::vector supports element insertion with")
 {
     SECTION("insert()")
     {
-        std::vector<int> vec{0, 1, 2, 3};
+        auto vec = std::vector<int>{0, 1, 2, 3};
         REQUIRE(vec.size() == 4);
         
         auto iter = vec.begin() + 2;
@@ -149,7 +150,7 @@ TEST_CASE("std::vector supports element insertion with")
 
     SECTION("push_back()")
     {
-        std::vector<int> vec{0, 1, 2, 3};
+        auto vec = std::vector<int>{0, 1, 2, 3};
         REQUIRE(vec.size() == 4);
 
         vec.push_back(77);
@@ -163,7 +164,7 @@ TEST_CASE("std::vector supports element insertion with")
 
     SECTION("emplace()")
     {
-        std::vector<std::pair<int, int>> vec{};
+        auto vec = std::vector<std::pair<int, int>>{};
         REQUIRE(vec.empty());
 
         vec.emplace(vec.begin(), 11, 22);
@@ -179,7 +180,7 @@ TEST_CASE("std::vector supports element insertion with")
 
     SECTION("emplace_back()")
     {
-        std::vector<std::pair<int, int>> vec{};
+        auto vec = std::vector<std::pair<int, int>>{};
         REQUIRE(vec.empty());
 
         vec.emplace_back(11, 22);
@@ -189,36 +190,181 @@ TEST_CASE("std::vector supports element insertion with")
     }
 }
 
-TEST_CASE("std::vector supports the erase / remove idiom")
+TEST_CASE("std::vector supports removing elements at a given position")
 {
-    std::vector<int> vec{0, 1, 2, 2, 3};
+    SECTION("with a single iterator")
+    {
+        auto c = std::vector<int>{1, 2, 3};
+        
+        auto i1 = ++std::begin(c);
 
-    REQUIRE(vec.size() == 5);
+        REQUIRE(c.size() == 3);
+        REQUIRE(*i1 == 2);
 
-    vec.erase(std::remove(vec.begin(), vec.end(), 2), vec.end());
+        c.erase(i1);  // iterator i is invalidated
 
-    REQUIRE(vec.size() == 3);
-    REQUIRE(vec[0] == 0);
-    REQUIRE(vec[1] == 1);
-    REQUIRE(vec[2] == 3);
+        auto i2 = ++std::begin(c);
+
+        REQUIRE(c.size() == 2);
+        REQUIRE(*i2 == 3);
+    }
+
+    SECTION("with a range specified by iterators (half-open)")
+    {
+        auto c = std::vector<int>{1, 2, 3, 4, 5};
+
+        auto beg = ++std::begin(c);
+        auto end = beg + 3;
+
+        REQUIRE(c.size() == 5);
+
+        c.erase(beg, end);
+
+        REQUIRE(c.size() == 2);
+        REQUIRE(c == std::vector<int>{1, 5});
+    }
 }
 
-TEST_CASE("std::vector supports the erase / remove idiom with remove_if")
+template <typename T>
+void erase(std::vector<T>& c, T const& val)
 {
-    std::vector<int> vec(10);
-    std::iota(vec.begin(), vec.end(), 0);
+    c.erase(std::remove(std::begin(c), std::end(c), val), std::end(c));
+}
 
-    REQUIRE(vec.size() == 10);
+TEST_CASE("std::vector supports removing elements equal to a specified value (erase-remove idiom)")
+{
+    SECTION("manually, in two distinct operations")
+    {
+        auto c = std::vector<int>{1, 2, 3};
 
-    vec.erase(
-        std::remove_if(vec.begin(), vec.end(), 
-            [](int i){ return i % 2 == 0; }), 
-        vec.end());
+        REQUIRE(c.size() == 3);
 
-    REQUIRE(vec.size() == 5);
-    REQUIRE(vec[0] == 1);
-    REQUIRE(vec[1] == 3);
-    REQUIRE(vec[2] == 5);
-    REQUIRE(vec[3] == 7);
-    REQUIRE(vec[4] == 9);
+        // std::remove() reorders the elements of the vector such that
+        // the removed element is now at the end of the vector (at or past c.end())
+        auto it = std::remove(std::begin(c), std::end(c), 2);
+
+        // the size is unchanged
+        REQUIRE(c.size() == 3);
+
+        // we can now use erase to actually remove and deallocate the element
+        c.erase(it, std::end(c));
+
+        REQUIRE(c.size() == 2);
+    }
+
+    SECTION("manually, in a single operation")
+    {
+        auto c = std::vector<int>{1, 2, 3};
+
+        REQUIRE(c.size() == 3);
+
+        // combine the two necessary calls
+        c.erase(std::remove(std::begin(c), std::end(c), 2), std::end(c));
+
+        REQUIRE(c.size() == 2);
+    }
+
+    SECTION("with a handy, custom wrapper")
+    {
+        auto c = std::vector<int>{1, 2, 3};
+
+        REQUIRE(c.size() == 3);
+
+        ::erase(c, 2);
+
+        REQUIRE(c.size() == 2);
+    }
+}
+
+template <typename T, typename Predicate>
+void erase_if(std::vector<T>& c, Predicate pred)
+{
+    c.erase(std::remove_if(std::begin(c), std::end(c), pred), std::end(c));
+}
+
+TEST_CASE("std::vector supports removing elements that satisfy a predicate")
+{
+    auto is_even = [](int i){ return i%2 == 0; };
+
+    SECTION("manually, in two distinct operations")
+    {
+        auto c = std::vector<int>{1, 2, 3};
+
+        // just like std::remove(), returns an iterator
+        auto it = std::remove_if(std::begin(c), std::end(c), is_even);
+
+        REQUIRE(c.size() == 3);
+
+        // now use the iterator from std::remove_f() to erase
+        c.erase(it, std::end(c));
+
+        REQUIRE(c.size() == 2);
+    }
+
+    SECTION("manually, in a single operation")
+    {
+        auto c = std::vector<int>{1, 2, 3};
+
+        REQUIRE(c.size() == 3);
+
+        c.erase(std::remove_if(std::begin(c), std::end(c), is_even), std::end(c));
+
+        REQUIRE(c.size() == 2);
+    }
+
+    SECTION("with a handy, custom wrapper")
+    {
+
+    }
+}
+
+template <typename T>
+void unique(std::vector<T>& c)
+{
+    if (!std::is_sorted(std::begin(c), std::end(c)))
+    {
+        std::sort(std::begin(c), std::end(c));
+    }
+
+    c.erase(std::unique(std::begin(c), std::end(c)), std::end(c));
+}
+
+TEST_CASE("std::vector supports removing duplicates")
+{
+    SECTION("which does not work if the duplicate elements are not consecutive")
+    {
+        auto c = std::vector<int>{1, 2, 3, 2};
+
+        REQUIRE(c.size() == 4);
+
+        c.erase(std::unique(std::begin(c), std::end(c)), std::end(c));
+
+        // size unchanged!
+        REQUIRE(c.size() == 4);
+    }
+
+    SECTION("but works as expected if the duplicates are consecutive")
+    {
+        auto c = std::vector<int>{1, 2, 3, 2};
+
+        REQUIRE(c.size() == 4);
+
+        std::sort(std::begin(c), std::end(c));
+        c.erase(std::unique(std::begin(c), std::end(c)), std::end(c));
+
+        REQUIRE(c.size() == 3);
+    }
+
+    SECTION("and is simplified by a handy utility function")
+    {
+        auto c1 = std::vector<int>{1, 2, 2, 3};
+        auto c2 = std::vector<int>{1, 2, 3, 2};
+
+        ::unique(c1);
+        ::unique(c2);
+
+        REQUIRE(c1.size() == 3);
+        REQUIRE(c2.size() == 3);
+        REQUIRE(c1 == c2);
+    }
 }
