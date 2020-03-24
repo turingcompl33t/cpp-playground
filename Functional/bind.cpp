@@ -71,4 +71,26 @@ TEST_CASE("std::bind suports binding member functions")
     }
 }
 
+TEST_CASE("std::bind supports composition of STL function objects")
+{
+    using namespace std::placeholders;
 
+    SECTION("simple case")
+    {
+        auto plus10 = std::bind(std::plus<int>{}, _1, 10);
+
+        REQUIRE(plus10(2) == 12);
+    }
+
+    SECTION("with nesting")
+    {
+        auto plus10times2 = std::bind(
+            std::multiplies<int>{},
+                std::bind(std::plus<int>{}, _1, 10),
+                2
+            );
+
+        auto r = plus10times2(2);
+        REQUIRE(r == 24);
+    }
+}
