@@ -1,17 +1,17 @@
-// Elements.cpp
-// Demo of basic string element and iterator access methods.
+// elements.cpp
+// Demo of basic std::string element and iterator access methods.
 //
 // Build
-//  cl /EHsc /nologo /std:c++17 /W4 /I c:\Dev\Catch2 Elements.cpp
+//  cl /EHsc /nologo /std:c++17 /W4 /I c:\Dev\Catch2 elements.cpp
 
 #define CATCH_CONFIG_MAIN
 #include <catch.hpp>
 
 #include <string>
 
-TEST_CASE("std::string::c_str() produced null-terminated string")
+TEST_CASE("std::string::c_str() produces null-terminated string")
 {
-    std::string str{"hello"};
+    auto str = std::string{"hello"};
     auto as_cstr = str.c_str();
 
     REQUIRE(as_cstr[0] == 'h');
@@ -24,7 +24,7 @@ TEST_CASE("std::string::c_str() produced null-terminated string")
 
 TEST_CASE("std::string supports iteration")
 {
-    std::string str{"hello world"};
+    auto str = std::string{"hello world"};
 
     auto iter1 = str.begin();
     auto iter2 = str.end();
@@ -41,7 +41,7 @@ TEST_CASE("std::string supports iteration")
 
 TEST_CASE("std::string iterator supports writes")
 {
-    std::string str{"hello"};
+    auto str = std::string{"hello"};
 
     REQUIRE(str == "hello");
     str.front() = 'j';

@@ -1,8 +1,8 @@
-// Manipulation.cpp
-// Demo of basic string manipulation methods.
+// manipulation.cpp
+// Demo of basic std::string manipulation methods.
 //
 // Build
-//  cl /EHsc /nologo /std:c++17 /W4 /I c:\Dev\Catch2 Manipulation.cpp
+//  cl /EHsc /nologo /std:c++17 /W4 /I c:\Dev\Catch2 manipulation.cpp
 
 #define CATCH_CONFIG_MAIN
 #include <catch.hpp>
@@ -11,7 +11,7 @@
 
 TEST_CASE("std::string supports append operations")
 {
-    std::string str{"butt"};
+    auto str = std::string{"butt"};
 
     SECTION("push_back()")
     {
@@ -39,7 +39,7 @@ TEST_CASE("std::string supports append operations")
 
     SECTION("append half-open range")
     {
-        std::string other{"erfinger"};
+        auto other = std::string{"erfinger"};
         str.append(other.begin(), other.end());
         REQUIRE(str == "butterfinger");
     }
@@ -47,7 +47,7 @@ TEST_CASE("std::string supports append operations")
 
 TEST_CASE("std::string supports removal with")
 {
-    std::string str{"therein"};
+    auto str = std::string{"therein"};
 
     SECTION("pop_back()")
     {
@@ -77,7 +77,7 @@ TEST_CASE("std::string supports removal with")
 
 TEST_CASE("std::string supports replacement with")
 {
-    std::string str{"substitution"};
+    auto str = std::string{"substitution"};
 
     SECTION("a range and a char*")
     {
@@ -87,7 +87,7 @@ TEST_CASE("std::string supports replacement with")
 
     SECTION("two ranges")
     {
-        std::string other{"innuendo"};
+        auto other = std::string{"innuendo"};
         str.replace(str.begin(), str.begin() + 3, 
             other.begin(), other.begin() + 2);
         REQUIRE(str == "institution");
@@ -95,7 +95,7 @@ TEST_CASE("std::string supports replacement with")
 
     SECTION("index/length pair and a string")
     {
-        std::string other{"vers"};
+        auto other = std::string{"vers"};
         str.replace(3, 6, other);
         REQUIRE(str == "subversion");
     }
@@ -103,7 +103,7 @@ TEST_CASE("std::string supports replacement with")
 
 TEST_CASE("std::string supports resize operations with")
 {
-    std::string str{"shamp"};
+    auto str = std::string{"shamp"};
     
     SECTION("element removal")
     {

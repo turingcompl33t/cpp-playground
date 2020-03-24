@@ -1,8 +1,8 @@
-// Search.cpp
-// Demo of basic string search operations.
+// search.cpp
+// Demo of basic std::string search operations.
 // 
 // Build
-//  cl /EHsc /nologo /std:c++17 /W4 /I c:\Dev\Catch2 Search.cpp
+//  cl /EHsc /nologo /std:c++17 /W4 /I c:\Dev\Catch2 search.cpp
 
 #define CATCH_CONFIG_MAIN
 #include <catch.hpp>
@@ -13,7 +13,7 @@ TEST_CASE("std::string find")
 {
     using namespace std::string_literals;
     
-    std::string word{"pizzazz"};
+    auto word = std::string{"pizzazz"};
 
     SECTION("locates substrings from strings")
     {
@@ -40,7 +40,7 @@ TEST_CASE("std::string rfind")
 {
     using namespace std::string_literals;
     
-    std::string word{"pizzazz"};
+    auto word = std::string{"pizzazz"};
 
     SECTION("locates substrings from strings")
     {
@@ -67,7 +67,7 @@ TEST_CASE("std::string::find_first_of()")
 {
     using namespace std::string_literals;
 
-    std::string word{"pizzazz"};
+    auto word = std::string{"pizzazz"};
 
     SECTION("locates characters within another string")
     {
@@ -84,7 +84,7 @@ TEST_CASE("std::string::find_last_of()")
 {
     using namespace std::string_literals;
 
-    std::string word{"pizzazz"};
+    auto word = std::string{"pizzazz"};
 
     SECTION("locates characters within another string")
     {
