@@ -9,8 +9,10 @@
 
 #include <array>
 #include <vector>
+#include <memory>
 #include <utility>
 #include <numeric>
+#include <algorithm>
 
 TEST_CASE("std::vector supports default construction")
 {
@@ -367,4 +369,69 @@ TEST_CASE("std::vector supports removing duplicates")
         REQUIRE(c2.size() == 3);
         REQUIRE(c1 == c2);
     }
+}
+
+TEST_CASE("removing from a std::vector of std::unique_ptr works as expected")
+{
+    using unique_int = std::unique_ptr<int>;
+
+    auto c = std::vector<unique_int>{};
+    c.push_back(std::make_unique<int>(1));
+    c.push_back(std::make_unique<int>(2));
+    c.push_back(std::make_unique<int>(3));
+
+    REQUIRE(c.size() == 3);
+
+    ::erase_if(c, [](auto const& pi){ return *pi%2 == 0; });
+
+    REQUIRE(c.size() == 2);
+    REQUIRE(*c[0] == 1);
+    REQUIRE(*c[1] == 3);
+}
+
+// helper function template that accepts a boolean
+// function and returns a function that performs its negation
+template <typename Function>
+auto negate(Function fn)
+{
+    return [fn](auto... args)
+    {
+        return !fn(args...);
+    };
+}
+
+TEST_CASE("use std::stable_partition (with inverted predicate) to erase owning raw pointers")
+{
+    auto c = std::vector<int*>{
+        new int{1}, 
+        new int{2}, 
+        new int{3}, 
+        new int{4}, 
+        new int{5}
+        };
+    
+    // this is the desired predicate that we want to remove on
+    auto is_even = [](int* pi){ return *pi%2 == 0; };
+
+    // partitions the range into elements satisfying the predicate and
+    // those that don't satisfy the predicate, in such a way that all those
+    // elements that satisfy the predicate come before those that do not
+    // (which is why we need to negate the removal predicate)
+    // returns the iterator at the partition point - the first element
+    // that does NOT satisfy the predicate
+    auto it = std::stable_partition(std::begin(c), std::end(c), negate(is_even));
+
+    // deallocate the raw pointers
+    std::for_each(it, std::end(c), [](int* pi){ delete pi; });
+
+    // and finally remove them
+    c.erase(it, std::end(c));
+
+    REQUIRE(c.size() == 3);
+    REQUIRE(*c[0] == 1);
+    REQUIRE(*c[1] == 3);
+    REQUIRE(*c[2] == 5);
+
+    // cleanup
+    std::for_each(std::begin(c), std::end(c), [](int* pi){ delete pi; });
 }
