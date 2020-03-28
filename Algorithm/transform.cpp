@@ -8,8 +8,9 @@
 #define CATCH_CONFIG_MAIN
 #include <catch.hpp>
 
-#include <numeric>
+#include <tuple>
 #include <vector>
+#include <numeric>
 #include <algorithm>
 
 TEST_CASE("std::transform()")
@@ -23,4 +24,66 @@ TEST_CASE("std::transform()")
 
     REQUIRE(c.size() == 10);
     REQUIRE(c.back() == 81);
+}
+
+template <typename Iter1, typename Iter2, typename Iter3>
+void zip(Iter1 beg1, Iter1 end1, Iter2 beg2, Iter3 beg3)
+{
+    std::transform(beg1, end1, beg2, beg3, 
+        [](auto& e1, auto& e2)
+        {
+            return std::make_pair(e1, e2);
+        });
+}
+
+TEST_CASE("std::transform() can be used to implement zip-like functionality")
+{
+    SECTION("common element type")
+    {
+        auto c1 = std::vector<int>(5);
+        auto c2 = std::vector<int>(5);
+
+        std::iota(std::begin(c1), std::end(c1), 1);  // 1 - 5 
+        std::iota(std::begin(c2), std::end(c2), 6);  // 6 - 10
+
+        auto r = std::vector<std::pair<int, int>>{};
+
+        ::zip(
+            std::begin(c1), 
+            std::end(c1), 
+            std::begin(c2), 
+            std::back_inserter(r));
+
+        REQUIRE(r.size() == 5);
+        REQUIRE(r[0] == std::pair<int, int>{1, 6});
+        REQUIRE(r[4] == std::pair<int, int>{5, 10});
+    }
+
+    SECTION("distinct element types")
+    {
+        auto c1 = std::vector<int>(5);
+        auto c2 = std::vector<std::string>(5);
+
+        std::iota(std::begin(c1), std::end(c1), 1);
+
+        auto i = 1;
+        std::generate(std::begin(c2), std::end(c2), 
+            [&i](){ return std::to_string(i++); });
+
+        auto r = std::vector<std::pair<int, std::string>>{};
+
+        ::zip(
+            std::begin(c1), 
+            std::end(c1),
+            std::begin(c2),
+            std::back_inserter(r));
+
+        REQUIRE(r.size() == 5);
+
+        REQUIRE(r[0].first == 1);
+        REQUIRE(r[0].second == "1");
+
+        REQUIRE(r[4].first == 5);
+        REQUIRE(r[4].second == "5");
+    }
 }
