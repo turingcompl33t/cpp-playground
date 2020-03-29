@@ -12,6 +12,7 @@
 #include <vector>
 #include <numeric>
 #include <algorithm>
+#include <execution>
 
 TEST_CASE("std::transform()")
 {
@@ -86,4 +87,31 @@ TEST_CASE("std::transform() can be used to implement zip-like functionality")
         REQUIRE(r[4].first == 5);
         REQUIRE(r[4].second == "5");
     }
+}
+
+TEST_CASE("std::transform() can be used with a parallel execution policy")
+{
+    auto c = std::vector<int>(10);
+    std::iota(std::begin(c), std::end(c), 1); // 1 - 10
+
+    // NOTE: wanted to default construct r here and use 
+    // a back_insert_iterator to output transform results 
+    // to the result vector, but the parallel_policy requires 
+    // forward_iterators or "stronger" - got a nice compile error
+
+    auto r = std::vector<int>(10);
+
+    std::transform(
+        std::execution::par,
+        std::begin(c), std::end(c),
+        std::begin(r),
+        [](int i)
+        {
+            return i*2;
+        });
+
+    auto c_sum = std::accumulate(std::begin(c), std::end(c), 0);
+    auto r_sum = std::accumulate(std::begin(r), std::end(r), 0);
+
+    REQUIRE(r_sum == 2*c_sum);
 }
