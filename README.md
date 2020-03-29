@@ -51,6 +51,11 @@ Getting up and running with the {fmt} library is still relatively straightforwar
 
 As before, enable Intellisense support by editing the _c\_cpp\_properties.json_ configuration file.
 
+### Reading List
+
+- [Fluent C++ Blog](https://www.fluentcpp.com/)
+- [A Visitor's Guide to C++ Allocators](https://rawgit.com/google/cxx-std-draft/allocator-paper/allocator_user_guide.html)
+
 ### References 
 
 - _C++ Crash Course_ by Josh Lospinoso
