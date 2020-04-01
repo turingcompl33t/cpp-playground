@@ -1,5 +1,7 @@
 // without.cpp
 //
+// Constructing HTML markup without builders.
+//
 // Build
 //  cl /EHsc /nologo /std:c++17 /W4 without.cpp
 

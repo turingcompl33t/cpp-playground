@@ -1,5 +1,7 @@
 // builder.cpp
 //
+// Basic builder example.
+//
 // Build
 //  cl /EHsc /nologo /std:c++17 /W4 builder.cpp
 

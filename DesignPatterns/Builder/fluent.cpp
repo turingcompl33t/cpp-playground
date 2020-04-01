@@ -1,5 +1,7 @@
 // fluent.cpp
 //
+// Simple demo of the fluent-style builder design pattern.
+//
 // Build
 //  cl /EHsc /nologo /std:c++17 /W4 fluent.cpp
 
