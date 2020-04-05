@@ -99,5 +99,6 @@
         "xutility": "cpp",
         "charconv": "cpp"
     },
-    "git.ignoreLimitWarning": true
+    "git.ignoreLimitWarning": true,
+    "cmake.configureOnOpen": false
 }
