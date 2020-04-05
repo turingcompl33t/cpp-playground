@@ -3,7 +3,6 @@
 ### Table of Contents
 
 - [Classes](./Classes.md)
-- [Concurrency](./Concurrency.md)
 - [Development Setup](./Dev.md)
 - [Error Handling](./Error.md)
 - [Functions](./Functions.md)
