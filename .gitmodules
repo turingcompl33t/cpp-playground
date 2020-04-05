@@ -13,3 +13,4 @@
 [submodule "_Deps/Boost"]
 	path = _Deps/Boost
 	url = https://github.com/turingcompl33t/boost-release.git
+	ignore = dirty

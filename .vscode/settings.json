@@ -98,5 +98,6 @@
         "xtree": "cpp",
         "xutility": "cpp",
         "charconv": "cpp"
-    }
+    },
+    "git.ignoreLimitWarning": true
 }
