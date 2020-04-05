@@ -2,7 +2,7 @@
 // Test of concept support in MSVC.
 //
 // Build
-//  cl /EHsc /nologo /W4 /std:c++latest /I C:\Dev\Catch2 hello_concepts.cpp
+//  cl /EHsc /nologo /W4 /std:c++latest /I %CPP_WORKSPACE%\_Deps\Catch2 hello_concepts.cpp
 
 #define CATCH_CONFIG_MAIN
 #include <catch.hpp>

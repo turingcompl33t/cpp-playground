@@ -2,7 +2,7 @@
 // Demonstration of std::unique_ptr semantics.
 //
 // Build
-//  cl /EHsc /nologo /W4 /std:c++17 /I C:\Dev\Catch2 unique_ptr.cpp
+//  cl /EHsc /nologo /W4 /std:c++17 /I %CPP_WORKSPACE%\_Deps\Catch2 unique_ptr.cpp
 
 #define CATCH_CONFIG_MAIN
 #include <catch.hpp>

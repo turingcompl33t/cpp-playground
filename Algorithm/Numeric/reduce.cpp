@@ -3,7 +3,7 @@
 // Demo of std::reduce()
 //
 // Build
-//  cl /EHsc /nologo /std:c++17 /W4 /I C:\Dev\Catch2 reduce.cpp
+//  cl /EHsc /nologo /std:c++17 /W4 /I %CPP_WORKSPACE%\_Deps\Catch2 reduce.cpp
 
 #define CATCH_CONFIG_MAIN
 #include <catch.hpp>

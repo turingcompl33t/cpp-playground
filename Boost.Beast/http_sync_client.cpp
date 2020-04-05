@@ -3,7 +3,7 @@
 // synchronous http client.
 //
 // Build
-//  cl /EHsc /nologo /std:c++17 /W4 /I C:\Dev\Boost http_sync_client.cpp
+//  cl /EHsc /nologo /std:c++17 /W4 /I %CPP_WORKSPACE%\_Deps\Boost http_sync_client.cpp
 
 #define _WIN32_WINNT 0x0601
 #define BOOST_ALL_NO_LIB

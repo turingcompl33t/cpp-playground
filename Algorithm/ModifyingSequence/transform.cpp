@@ -3,7 +3,7 @@
 // Demo of std::transform()
 //
 // Build
-//  cl /EHsc /nologo /std:c++17 /W4 /I C:\Dev\Catch2 transform.cpp
+//  cl /EHsc /nologo /std:c++17 /W4 /I %CPP_WORKSPACE%\_Deps\Catch2 transform.cpp
 
 #define CATCH_CONFIG_MAIN
 #include <catch.hpp>

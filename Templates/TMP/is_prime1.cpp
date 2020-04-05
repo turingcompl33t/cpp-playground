@@ -2,7 +2,7 @@
 // Basic compile time computation with C++98 features.
 //
 // Build
-//  cl /EHsc /nologo /W4 /std:c++17 /I C:\Dev\Catch2 is_prime1.cpp
+//  cl /EHsc /nologo /W4 /std:c++17 /I %CPP_WORKSPACE%\_Deps\Catch2 is_prime1.cpp
 
 #define CATCH_CONFIG_MAIN
 #include <catch.hpp>

@@ -2,7 +2,7 @@
 // Demo of basic range utility: convenience.
 //
 // Build
-//  cl /EHsc /nologo /W4 /std:c++latest /permissive- /experimental:preprocessor /I C:\Dev\Catch2 /I C:\Dev\Rangev3\Include convenience.cpp
+//  cl /EHsc /nologo /W4 /std:c++latest /permissive- /experimental:preprocessor /I %CPP_WORKSPACE%\_Deps\Catch2 /I %CPP_WORKSPACE%\_Deps\RangeV3\Include convenience.cpp
 
 #define CATCH_CONFIG_MAIN
 #include <catch.hpp>

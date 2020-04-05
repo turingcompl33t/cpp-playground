@@ -5,7 +5,7 @@
 // as opposed to one that unrolls loops or specializes a function.
 //
 // Build
-//  cl /EHsc /nologo /W4 /std:c++17 /I C:\Dev\Catch2 factorial.cpp
+//  cl /EHsc /nologo /W4 /std:c++17 /I %CPP_WORKSPACE%\_Deps\Catch2 factorial.cpp
 
 #define CATCH_CONFIG_MAIN
 #include <catch.hpp>

@@ -2,7 +2,7 @@
 // Demo of std::optional.
 //
 // Build
-//  cl /EHsc /nologo /std:c++17 /W4 /I c:\Dev\Boost /I c:\Dev\Catch2 Optional.cpp
+//  cl /EHsc /nologo /std:c++17 /W4 /I %CPP_WORKSPACE%\_Deps\Boost /I %CPP_WORKSPACE%\_Deps\Catch2 Optional.cpp
 
 #define CATCH_CONFIG_MAIN
 #include <catch.hpp>

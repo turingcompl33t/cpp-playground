@@ -3,7 +3,7 @@
 // Demo of std::is_sorted()
 //
 // Build
-//  cl /EHsc /nologo /std:c++17 /W4 /I C:\Dev\Catch2 is_sorted.cpp
+//  cl /EHsc /nologo /std:c++17 /W4 /I %CPP_WORKSPACE%\_Deps\Catch2 is_sorted.cpp
 
 #define CATCH_CONFIG_MAIN
 #include <catch.hpp>

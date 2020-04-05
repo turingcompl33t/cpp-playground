@@ -2,7 +2,7 @@
 // Composing asynchronous operations.
 //
 // Build
-//  cl /EHsc /nologo /std:c++17 /W4 /I C:\Dev\Catch2 /I C:\Dev\Boost composed1.cpp
+//  cl /EHsc /nologo /std:c++17 /W4 /I %CPP_WORKSPACE%\_Deps\Catch2 /I %CPP_WORKSPACE%\_Deps\Boost composed1.cpp
 
 #define CATCH_CONFIG_MAIN
 #include <catch.hpp>

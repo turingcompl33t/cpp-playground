@@ -2,7 +2,7 @@
 // Compile-time computation of Nth Fibonacci number via TMP.
 //
 // Build
-//  cl /EHsc /nologo /W4 /std:c++17 /I C:\Dev\Catch2 fibonacci.cpp
+//  cl /EHsc /nologo /W4 /std:c++17 /I %CPP_WORKSPACE%\_Deps\Catch2 fibonacci.cpp
 
 #define CATCH_CONFIG_MAIN
 #include <catch.hpp>

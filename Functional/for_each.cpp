@@ -4,7 +4,7 @@
 // the function object it was passed.
 //
 // Build
-//  cl /EHsc /nologo /std:c++17 /W4 /I C:\Dev\Catch2 for_each.cpp
+//  cl /EHsc /nologo /std:c++17 /W4 /I %CPP_WORKSPACE%\_Deps\Catch2 for_each.cpp
 
 #define CATCH_CONFIG_MAIN
 #include <catch.hpp>

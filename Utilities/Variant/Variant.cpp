@@ -2,7 +2,7 @@
 // Demo of std::variant.
 //
 // Build
-//  cl /EHsc /nologo /std:c++17 /W4 /I c:\Dev\Catch2 Variant.cpp
+//  cl /EHsc /nologo /std:c++17 /W4 /I %CPP_WORKSPACE%\_Deps\Catch2 Variant.cpp
 
 #define CATCH_CONFIG_MAIN
 #include <catch.hpp>

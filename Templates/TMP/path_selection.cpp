@@ -2,7 +2,7 @@
 // Execution path selection with partial specialization.
 //
 // Build
-//  cl /EHsc /nologo /W4 /std:c++17 /I C:\Dev\Catch2 path_selection.cpp
+//  cl /EHsc /nologo /W4 /std:c++17 /I %CPP_WORKSPACE%\_Deps\Catch2 path_selection.cpp
 
 #define CATCH_CONFIG_MAIN
 #include <catch.hpp>

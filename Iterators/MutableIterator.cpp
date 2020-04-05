@@ -2,7 +2,7 @@
 // Demo of basic mutable iterator usage.
 //
 // Build
-//  cl /EHsc /nologo /std:c++17 /W4 /I c:\Dev\Catch2 MutableIterator.cpp
+//  cl /EHsc /nologo /std:c++17 /W4 /I %CPP_WORKSPACE%\_Deps\Catch2 MutableIterator.cpp
 
 #define CATCH_CONFIG_MAIN
 #include <catch.hpp>

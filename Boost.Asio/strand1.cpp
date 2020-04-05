@@ -2,7 +2,7 @@
 // Using strands to serialize operations.
 //
 // Build
-//  cl /EHsc /nologo /std:c++17 /W4 /I C:\Dev\Catch2 /I C:\Dev\Boost strand1.cpp
+//  cl /EHsc /nologo /std:c++17 /W4 /I %CPP_WORKSPACE%\_Deps\Catch2 /I %CPP_WORKSPACE%\_Deps\Boost strand1.cpp
 
 #define CATCH_CONFIG_MAIN
 #include <catch.hpp>

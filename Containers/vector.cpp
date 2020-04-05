@@ -2,7 +2,7 @@
 // Demo of basic properties and usage of std::vector.
 //
 // Build
-//  cl /EHsc /nologo /std:c++17 /W4 /I c:\Dev\Catch2 vector.cpp
+//  cl /EHsc /nologo /std:c++17 /W4 /I %CPP_WORKSPACE%\_Deps\Catch2 vector.cpp
 
 #define CATCH_CONFIG_MAIN
 #include <catch.hpp>

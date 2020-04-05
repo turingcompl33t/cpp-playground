@@ -2,7 +2,7 @@
 // Demonstration of std::weak_ptr semantics.
 //
 // Build
-//  cl /EHsc /nologo /W4 /std:c++17 /I C:\Dev\Catch2 weak_ptr.cpp
+//  cl /EHsc /nologo /W4 /std:c++17 /I %CPP_WORKSPACE%\_Deps\Catch2 weak_ptr.cpp
 
 #define CATCH_CONFIG_MAIN
 #include <catch.hpp>

@@ -2,7 +2,7 @@
 // Demo of basic random access iterator usage.
 //
 // Build
-//  cl /EHsc /nologo /std:c++17 /W4 /I c:\Dev\Catch2 RandomAccessIterator.cpp
+//  cl /EHsc /nologo /std:c++17 /W4 /I %CPP_WORKSPACE%\_Deps\Catch2 RandomAccessIterator.cpp
 
 #define CATCH_CONFIG_MAIN
 #include <catch.hpp>

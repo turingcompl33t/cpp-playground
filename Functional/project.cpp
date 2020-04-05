@@ -8,7 +8,7 @@
 //  (https://www.fluentcpp.com/2020/02/07/transform-adaptor-equivalent-in-cpp/)
 //
 // Build
-//  cl /EHsc /nologo /std:c++14 /W4 /I C:\Dev\Catch2 project.cpp
+//  cl /EHsc /nologo /std:c++14 /W4 /I %CPP_WORKSPACE%\_Deps\Catch2 project.cpp
 //
 // NOTE: std::result_of_t is deprecated in C++17 in favor of
 // std::invoke_result_t, but when I replace std::result_of_t with

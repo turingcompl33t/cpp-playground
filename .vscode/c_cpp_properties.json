@@ -4,10 +4,10 @@
             "name": "Win32",
             "includePath": [
                 "${workspaceFolder}/**",
-                "C:/Dev/Boost",
-                "C:/Dev/Catch2",
-                "C:/Dev/FmtLib/include",
-                "c:/Dev/Rangev3/Include"
+                "_Deps/Boost",
+                "_Deps/Catch2",
+                "_Deps/FmtLib/include",
+                "_Deps/Rangev3/Include"
             ],
             "defines": [
                 "_DEBUG",

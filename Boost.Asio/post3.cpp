@@ -2,7 +2,7 @@
 // Using a work guard to keep IO context alive without work pending.
 //
 // Build
-//  cl /EHsc /nologo /std:c++17 /W4 /I C:\Dev\Catch2 /I C:\Dev\Boost post3.cpp
+//  cl /EHsc /nologo /std:c++17 /W4 /I %CPP_WORKSPACE%\_Deps\Catch2 /I %CPP_WORKSPACE%\_Deps\Boost post3.cpp
 
 #define CATCH_CONFIG_MAIN
 #include <catch.hpp>

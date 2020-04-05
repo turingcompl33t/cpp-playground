@@ -2,7 +2,7 @@
 // Demo of boost::gregorian calendar utility.
 //
 // Build
-//  cl /EHsc /nologo /std:c++17 /W4 /I c:\Dev\Boost /I c:\Dev\Catch Gregorian.cpp /link /LIBPATH:C:\Dev\Boost\stage\lib
+//  cl /EHsc /nologo /std:c++17 /W4 /I %CPP_WORKSPACE%\_Deps\Boost /I c:\Dev\Catch Gregorian.cpp /link /LIBPATH:%CPP_WORKSPACE%\_Deps\Boost\stage\lib
 
 #define CATCH_CONFIG_MAIN
 #include <catch.hpp>

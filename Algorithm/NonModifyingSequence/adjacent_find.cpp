@@ -3,7 +3,7 @@
 // Demo of std::adjacent_find()
 //
 // Build
-//  cl /EHsc /nologo /std:c++17 /W4 /I C:\Dev\Catch2 adjacent_find.cpp
+//  cl /EHsc /nologo /std:c++17 /W4 /I %CPP_WORKSPACE%\_Deps\Catch2 adjacent_find.cpp
 
 #define CATCH_CONFIG_MAIN
 #include <catch.hpp>
