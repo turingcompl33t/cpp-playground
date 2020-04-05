@@ -5,9 +5,12 @@ Exploring C++ features, new and old.
 ### External Libraries
 
 Some of the examples in this repository make use of the following external C++ libraries:
+
 - Boost
-- Catch
+- Catch2
 - {fmt}
+- Google Test / Google Mock
+- Range V3
 
 Building and utilizing these libraries each involve their own set of "gotchas" - below I have attempted to record make note of these in order to simplify recreating the programs in this repository.
 
@@ -50,6 +53,43 @@ Getting up and running with the {fmt} library is still relatively straightforwar
 - No linking setup required
 
 As before, enable Intellisense support by editing the _c\_cpp\_properties.json_ configuration file.
+
+### Google Test / Google Mock
+
+Build Google Test / Google Mock (the GMock target automatically builds the GTest target) with CMake.
+
+```
+cd _Deps/GoogleTest
+mkdir build && cd build
+cmake .. -G Ninja
+ninja
+```
+
+This build produces four (4) distinct static libraries for use by our applications:
+
+- `gmockd.lib`: debug version of the GMock library
+- `gmock_maind.lib`: debug version of the GMock library with support for automatic entry point generation
+- `gtestd.lib`: debug version of the GTest library
+- `gtest_maind.lib`: debug version of the GTest library with support for automatic entry point generation
+
+Which of course implies that the default build (invoked above) generates the debug versions of the Google Test and Google Mock libraries. Obviously you will need to alter this process slightly if you require the release versions.
+
+Generating the debug versions of the Google Test and Google Mock libraries has a few implications for how we need to compile and link our applications that make use of these libraries:
+
+- If we don't specify a runtime library explicitly at compile time, we link with the static release version of the runtime (equivalent to specifying `/MT`). However, the debug versions of Google Test and Google Mock link with the static debug version of the runtime. Therefore, if we attempt to link our default-generated object file with the debug Google Test / Google Mock libraries, we will get a nasty runtime library mismatch. Fix this by specifying `/MTd` to link with the static debug version of the runtime.
+- Changing the runtime version in this way also implicitly changes our iterator debug level(`_ITERATOR_DEBUG_LEVEL`) to 2, which matches the version defined by the static debug versions of the libraries.
+
+The remaining steps for getting started with Google Test / Google Mock are standard:
+
+- Add the public include directory to the compiler's include path
+- Add the directory in which the static libraries were generated to the linker's search path
+- Link against the appropriate version of the library for your needs
+
+Thus far I have been unsuccessful in getting an application in which the entry point is provided by GTest to link. I always recieve the "entry point must be defined" linker error, but if I specify `/SUBSYSTEM:CONSOLE` in an attempt to tell the linker to look for the `main()` provided by GTest, I suddenly get unresolved externals for the application object file.
+
+### Range V3
+
+TODO
 
 ### Reading List
 
