@@ -18,7 +18,7 @@ struct contains
     template <typename Iter1, typename Iter2>
     bool operator()(Iter1 begin1, Iter1 end1, Iter2 begin2, Iter2 end2) const
     {
-        return std::distance(begin2, end2) == 0
+        return begin2 == end2
             || std::search(begin1, end1, begin2, end2, Comparer()) != end1;
     }
 };
