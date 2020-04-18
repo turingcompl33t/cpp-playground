@@ -97,7 +97,10 @@
         "xtr1common": "cpp",
         "xtree": "cpp",
         "xutility": "cpp",
-        "charconv": "cpp"
+        "charconv": "cpp",
+        "format": "cpp",
+        "bit": "cpp",
+        "cinttypes": "cpp"
     },
     "git.ignoreLimitWarning": true,
     "cmake.configureOnOpen": false
