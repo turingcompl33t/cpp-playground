@@ -1,8 +1,9 @@
-// NextPrev.cpp
-// Demo of basic std::next and std::prev usage.
+// next_prev.cpp
+//
+// Demo of basic std::next() and std::prev() usage.
 //
 // Build
-//  cl /EHsc /nologo /std:c++17 /W4 /I %CPP_WORKSPACE%\_Deps\Catch2 NextPrev.cpp
+//  cl /EHsc /nologo /std:c++17 /W4 /I %CPP_WORKSPACE%\_Deps\Catch2 next_prev.cpp
 
 #define CATCH_CONFIG_MAIN
 #include <catch.hpp>
@@ -14,10 +15,10 @@
 
 TEST_CASE("std::next() returns an appropriate iterator")
 {
-    std::vector<int> v(10);
-    std::iota(v.begin(), v.end(), 0);
+    auto c = std::vector<int>(10);
+    std::iota(c.begin(), c.end(), 0);
 
-    auto iter1 = v.begin();
+    auto iter1 = c.begin();
 
     REQUIRE(*iter1 == 0);
     
@@ -30,10 +31,10 @@ TEST_CASE("std::next() returns an appropriate iterator")
 
 TEST_CASE("std::prev() returns an appropriate iterator")
 {
-    std::vector<int> v(10);
-    std::iota(v.begin(), v.end(), 0);
+    auto c = std::vector<int>(10);
+    std::iota(c.begin(), c.end(), 0);
 
-    auto iter1 = v.end();
+    auto iter1 = c.end();
     --iter1;
 
     REQUIRE(*iter1 == 9);

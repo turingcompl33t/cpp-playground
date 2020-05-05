@@ -68,3 +68,28 @@ TEST_CASE("std::search() can be used to implement substring search")
     REQUIRE(::contains_substring(sentence, "perfect simplicity"));
     REQUIRE_FALSE(::contains_substring(sentence, "perfect insanity"));
 }
+
+TEST_CASE("std::search() returns begin when test sequence is empty and")
+{
+    SECTION("target sequence is nonempty")
+    {
+        auto const s1 = std::string{"hello"};
+        auto const s2 = std::string{""};
+
+        auto r = std::search(s1.begin(), s1.end(), s2.begin(), s2.end());
+
+        REQUIRE(r == s1.begin());
+        REQUIRE(r != s1.end());
+    }
+
+    SECTION("target sequence is also empty")
+    {
+        auto const s1 = std::string{""};
+        auto const s2 = std::string{""};
+
+        auto r = std::search(s1.begin(), s1.end(), s2.begin(), s2.end());
+        
+        REQUIRE(r == s1.begin());
+        REQUIRE(r == s1.end());
+    }
+}
