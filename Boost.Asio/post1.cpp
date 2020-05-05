@@ -8,7 +8,6 @@
 #include <catch.hpp>
 
 #define BOOST_ALL_NO_LIB
-
 #include <boost/asio.hpp>
 
 namespace net = boost::asio;

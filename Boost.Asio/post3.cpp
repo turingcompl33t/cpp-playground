@@ -8,7 +8,6 @@
 #include <catch.hpp>
 
 #define BOOST_ALL_NO_LIB
-
 #include <thread>
 #include <vector>
 #include <boost/asio.hpp>
