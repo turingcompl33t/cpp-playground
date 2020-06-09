@@ -1,8 +1,7 @@
-// Optional.cpp
-// Demo of std::optional.
+// optional_valueor.cpp
 //
 // Build
-//  cl /EHsc /nologo /std:c++17 /W4 OptionalValueOr.cpp
+//  cl /EHsc /nologo /std:c++17 /W4 optional_valueor.cpp
 
 #include <string>
 #include <optional>
@@ -11,7 +10,7 @@
 
 auto create(bool flag)
 {
-    const std::string value = "Hello Optional";
+    std::string const value = "Hello Optional";
     return flag ? 
         std::optional<std::string>{ value } 
         : std::nullopt;

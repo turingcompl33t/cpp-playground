@@ -139,6 +139,21 @@ TEST_CASE("std::map supports construction")
     }
 }
 
+TEST_CASE("std::map supports static initialization")
+{
+    std::map<std::string, int> const m
+    {
+        {"hello", 0},
+        {"world", 1}
+    };
+
+    auto r1 = m.find("hello");
+    auto r2 = m.find("world");
+
+    REQUIRE((*r1).second == 0);
+    REQUIRE((*r2).second == 1);
+}
+
 TEST_CASE("search operations on std::map")
 {
     SECTION("find()")
