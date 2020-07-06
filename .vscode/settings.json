@@ -100,7 +100,8 @@
         "charconv": "cpp",
         "format": "cpp",
         "bit": "cpp",
-        "cinttypes": "cpp"
+        "cinttypes": "cpp",
+        "span": "cpp"
     },
     "git.ignoreLimitWarning": true,
     "cmake.configureOnOpen": false

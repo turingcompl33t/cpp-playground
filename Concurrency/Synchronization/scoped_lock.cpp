@@ -1,12 +1,15 @@
-// LockGuard.cpp
-// Demonstration of basic std::lock_guard functionality.
+// scoped_lock.cpp
+// Demonstration of basic std::scoped_lock functionality.
 //
 // Build:
-//  cl /EHsc /nologo /W4 /std:c++17 LockGuard.cpp
+//  cl /EHsc /nologo /W4 /std:c++17 scoped_lock.cpp
 
 #include <mutex>
 #include <thread>
 #include <iostream>
+
+constexpr static auto const SUCCESS = 0x0;
+constexpr static auto const FAILURE = 0x1;
 
 struct X
 {
@@ -31,14 +34,11 @@ void swap(X& lhs, X& rhs)
         return;
     }
 
-    // acquire both locks atomically
-    std::lock(lhs.mutex_, rhs.mutex_);
-
-    // construct a lock guard which merely adopts the already-held locks
+    // acquire both locks atomically and guard release
     // here we rely on some dope template argument deduction;
-    // this is equivalent to std::lock_guard<std::mutex>
-    std::lock_guard guard_a{lhs.mutex_, std::adopt_lock};
-    std::lock_guard guard_b{rhs.mutex_, std::adopt_lock};
+    // this is equivalent to:
+    // std::scoped_lock<std::mutex, std::mutex> ...
+    std::scoped_lock lock{lhs.mutex_, rhs.mutex_};
 
     std::swap(lhs.data_, rhs.data_);
 }
@@ -57,4 +57,6 @@ int main()
     std::cout << "After Swap:\n";
     std::cout << "x0 = " << x0 << '\n';
     std::cout << "x1 = " << x1 << '\n';
+
+    return SUCCESS;
 }
