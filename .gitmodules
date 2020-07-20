@@ -15,3 +15,6 @@
 [submodule "_Deps/FmtLib"]
 	path = _Deps/FmtLib
 	url = https://github.com/fmtlib/fmt.git
+[submodule "_Deps/Expected"]
+	path = _Deps/Expected
+	url = git@github.com:TartanLlama/expected.git
