@@ -1,12 +1,11 @@
 // ref_qualified.cpp
+// Demonstration of ref-qualified member functions.
 
 #define CATCH_CONFIG_MAIN
 #include <catch2/catch.hpp>
 
 #include <tuple>
 #include <utility>
-#include <cstdlib>
-#include <iostream>
 
 enum class MemberType
 {
