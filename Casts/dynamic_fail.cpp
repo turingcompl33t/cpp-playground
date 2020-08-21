@@ -1,4 +1,4 @@
-// DynamicFail.cpp
+// dynamic_fail.cpp
 // A case study of a common failure in dynamic casting.
 
 #include <iostream>
