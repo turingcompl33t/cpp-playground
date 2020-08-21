@@ -19,3 +19,6 @@ target_link_libraries(sequentially_consistent PRIVATE Catch2 threads warnings)
 
 add_executable(bench_atomic_vs_mutex "bench_atomic_vs_mutex.cpp")
 target_link_libraries(bench_atomic_vs_mutex PRIVATE benchmark threads warnings)
+
+add_executable(bench_sharing "bench_sharing.cpp")
+target_link_libraries(bench_sharing PRIVATE benchmark threads warnings)
