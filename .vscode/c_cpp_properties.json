@@ -6,7 +6,8 @@
         "includePath": [
             "${workspaceFolder}/**", 
             "_Deps/catch2/include",
-            "_Deps/expected/include"
+            "_Deps/expected/include",
+            "_Deps/benchmark/include"
         ],
         "compilerPath": "/usr/bin/gcc",
         "cStandard": "c11",

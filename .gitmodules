@@ -4,3 +4,6 @@
 [submodule "_Deps/catch2"]
 	path = _Deps/catch2
 	url = git@github.com:catchorg/Catch2.git
+[submodule "_Deps/benchmark"]
+	path = _Deps/benchmark
+	url = git@github.com:google/benchmark.git

@@ -6,6 +6,7 @@ Exploring C++ features, new and old.
 
 Some of the examples in this repository make use of the following external C++ libraries:
 
+- Google Benchmark
 - Boost
 - Catch2
 - {fmt}
@@ -13,6 +14,10 @@ Some of the examples in this repository make use of the following external C++ l
 - Range V3
 
 Building and utilizing these libraries each involve their own set of "gotchas" - below I have attempted to record make note of these in order to simplify recreating the programs in this repository.
+
+### Google Benchmark
+
+Assuming you cloned the repository recursively (i.e. with `git clone --recursive`) you have the Google Benchmark library added as a submodule. The `CMakeLists.txt` in each module directory takes care of the rest of the configuration.
 
 #### Boost
 
