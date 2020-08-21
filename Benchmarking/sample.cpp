@@ -1,4 +1,5 @@
 // sample.cpp
+//
 // Sample from the Google Benchmark documentation to test if
 // we are able to build and link against the library correctly.
 

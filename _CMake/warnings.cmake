@@ -79,4 +79,8 @@ else()
     message(AUTHOR_WARNING "No compiler warnings set for '${CMAKE_CXX_COMPILER_ID}' compiler.")
 endif()
 
+# set the target warnings
 target_compile_options(warnings INTERFACE ${PROJECT_WARNINGS})
+
+# and (for now) just sneak this c++20 requirement in here
+target_compile_features(warnings INTERFACE cxx_std_20)
