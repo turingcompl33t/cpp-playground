@@ -1,19 +1,16 @@
 // tracer.cpp
 // Simple object lifetime tracer.
-//
-// Build
-//  cl /EHsc /nologo /W4 /std:c++17 tracer.cpp
 
 #include <string>
 #include <random>
 #include <iostream>
 
-std::mt19937 g_gen{};
+std::mt19937                    g_gen{};
 std::uniform_int_distribution<> g_dist{0, 1000};
 
 class Tracer
 {
-    std::uniform_int<int>::result_type id;
+    std::uniform_int_distribution<int>::result_type id;
 
 public:
     explicit Tracer() : id{g_dist(g_gen)}
@@ -41,6 +38,8 @@ public:
         id = g_dist(g_gen);
         std::cout << '[' << id << ']'; 
         std::cout << " operator=(Tracer const&)\n";
+
+        return *this;
     }
 
     // move constructor
@@ -56,6 +55,8 @@ public:
         id = g_dist(g_gen);
         std::cout << '[' << id << ']'; 
         std::cout << " operator=(Tracer&&)\n";
+
+        return *this;
     }
 };
 
@@ -70,8 +71,10 @@ void use(T)
     std::cout << "use()\n";
 }
 
-void demo_construction()
+void demo_construction_and_assignment()
 {
+    std::cout << "[+] CONSTRUCTION AND ASSIGNMENT\n";
+
     auto t1 = Tracer{};
     auto t2 = Tracer{t1};
     auto t3 = t2;
@@ -81,12 +84,16 @@ void demo_construction()
 
 void demo_guaranteed_copy_elision()
 {
+    std::cout << "[+] GUARANTEED COPY ELISION\n";
+
     use(Tracer{});
     use(make_tracer());
-
 }
 
 int main()
 {
+    demo_construction_and_assignment();
     demo_guaranteed_copy_elision();
+
+    return EXIT_SUCCESS;
 }
