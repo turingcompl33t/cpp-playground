@@ -14,8 +14,6 @@ add_subdirectory("../../../_Deps/cdl" ${CMAKE_CURRENT_BINARY_DIR}/cdl)
 
 add_executable(test "test.cpp")
 target_link_libraries(test PRIVATE warnings threads Catch2 cdl)
-target_compile_features(test PRIVATE cxx_std_20)
 
 add_executable(bench "bench.cpp")
 target_link_libraries(bench PRIVATE warnings threads benchmark cdl)
-target_compile_features(test PRIVATE cxx_std_20)

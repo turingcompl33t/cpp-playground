@@ -4,7 +4,6 @@ cmake_minimum_required(VERSION 3.17)
 
 project(atomics CXX)
 
-include("../_CMake/benchmark.cmake")
 include("../_CMake/warnings.cmake")
 include("../_CMake/threads.cmake")
 
@@ -16,9 +15,3 @@ target_link_libraries(lockfree_shared_ptr PRIVATE warnings)
 
 add_executable(sequentially_consistent "sequentially_consistent.cpp")
 target_link_libraries(sequentially_consistent PRIVATE Catch2 threads warnings)
-
-add_executable(bench_atomic_vs_mutex "bench_atomic_vs_mutex.cpp")
-target_link_libraries(bench_atomic_vs_mutex PRIVATE benchmark threads warnings)
-
-add_executable(bench_sharing "bench_sharing.cpp")
-target_link_libraries(bench_sharing PRIVATE benchmark threads warnings)
