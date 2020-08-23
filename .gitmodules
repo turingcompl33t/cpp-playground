@@ -7,3 +7,6 @@
 [submodule "_Deps/benchmark"]
 	path = _Deps/benchmark
 	url = git@github.com:google/benchmark.git
+[submodule "_Deps/cdl"]
+	path = _Deps/cdl
+	url = git@github.com:turingcompl33t/cdl.git
