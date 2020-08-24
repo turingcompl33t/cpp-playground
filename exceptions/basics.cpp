@@ -1,12 +1,9 @@
 // basics.cpp
 // 
-// Demo of basic exception handling in C++
-//
-// Build
-//  cl /EHsc /nologo /std:c++17 /W4 /I %CPP_WORKSPACE%\_Deps\Catch2 basics.cpp
+// Demo of basic exception handling in C++.
 
 #define CATCH_CONFIG_MAIN
-#include <catch.hpp>
+#include <catch2/catch.hpp>
 
 #include <string>
 #include <stdexcept>
@@ -16,10 +13,7 @@ class catastrophic_failure
 {
 public:
     catastrophic_failure(std::string const& what_msg)
-        : std::runtime_error{what_msg}
-    {}
-
-    //const char* what() const noexcept override;
+        : std::runtime_error{what_msg} {}
 };
 
 int intense_compututation()

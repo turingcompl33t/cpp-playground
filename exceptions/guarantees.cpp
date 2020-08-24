@@ -1,19 +1,13 @@
 // guarantees.cpp
 // 
-// A look at the four levels of exception safety guarantees
+// A look at the four levels of exception safety guarantees.
 //
-// WARNING: extremely contrived example with plenty of instances
-// of poor class design
-//
-// Build
-//  cl /EHsc /nologo /std:c++17 /W4 /I %CPP_WORKSPACE%\_Deps\Catch2 guarantees.cpp
+// WARNING: extremely contrived example with poor class design.
 
 #define CATCH_CONFIG_MAIN
-#include <catch.hpp>
+#include <catch2/catch.hpp>
 
 #include <stdexcept>
-
-#pragma warning(disable : 4702)  // C4702 unreachable code
 
 class SomeType
 {
