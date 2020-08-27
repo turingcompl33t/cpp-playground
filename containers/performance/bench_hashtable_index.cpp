@@ -1,4 +1,4 @@
-// hashtable_index.cpp
+// bench_hashtable_index.cpp
 
 #include "benchmark/benchmark.h"
 

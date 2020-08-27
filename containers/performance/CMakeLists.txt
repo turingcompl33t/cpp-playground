@@ -10,8 +10,11 @@ include("../../_CMake/threads.cmake")
 
 add_subdirectory("../../_Deps/benchmark" ${CMAKE_CURRENT_BINARY_DIR}/benchmark)
 
-add_executable(vector_vs_deque "vector_vs_deque.cpp")
-target_link_libraries(vector_vs_deque PRIVATE benchmark warnings threads)
+add_executable(bench_vector_deque "bench_vector_deque.cpp")
+target_link_libraries(bench_vector_deque PRIVATE benchmark warnings threads)
 
-add_executable(hashtable_index "hashtable_index.cpp")
-target_link_libraries(hashtable_index PRIVATE benchmark warnings threads)
+add_executable(bench_hashtable_index "bench_hashtable_index.cpp")
+target_link_libraries(bench_hashtable_index PRIVATE benchmark warnings threads)
+
+add_executable(bench_lookup "bench_lookup.cpp")
+target_link_libraries(bench_lookup PRIVATE benchmark warnings threads)

@@ -1,4 +1,4 @@
-// vector_vs_deque.cpp
+// bench_vector_deque.cpp
 //
 // Quick + dirty test of vector vs deque performance when
 // removing the first element of the container.
