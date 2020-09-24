@@ -1,10 +1,8 @@
 // null.cpp
-//
-// Build
-//  cl /EHsc /nologo /std:c++17 /W4 /I %CPP_WORKSPACE%\_Deps\Catch2 null.cpp
+// Properties of the std::pmr::null_memory_resource.
 
 #define CATCH_CONFIG_MAIN
-#include <catch.hpp>
+#include <catch2/catch.hpp>
 
 #include <vector>
 #include <stdexcept>

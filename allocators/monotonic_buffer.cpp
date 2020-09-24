@@ -1,7 +1,5 @@
 // monotonic_buffer.cpp
-//
-// Build
-//  cl /EHsc /nologo /std:c++17 /W4 monotonic_buffer.cpp
+// Little exploration of std::pmr::monotonic_buffer_allocator.
 
 #include <vector>
 #include <iostream>
