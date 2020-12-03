@@ -13,3 +13,6 @@ target_link_libraries(heap PRIVATE warnings Catch2)
 
 add_executable(list "list.cpp")
 target_link_libraries(list PRIVATE warnings Catch2)
+
+add_executable(unordered-map "unordered_map.cpp")
+target_link_libraries(unordered-map PRIVATE warnings Catch2)
