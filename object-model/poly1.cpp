@@ -1,4 +1,6 @@
-// inheritance.cpp
+// poly1.cpp
+//
+// Some basic inheritance-based polymorphism.
 
 #define CATCH_CONFIG_MAIN
 #include <catch2/catch.hpp>
