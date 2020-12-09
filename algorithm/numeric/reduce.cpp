@@ -1,29 +1,26 @@
 // reduce.cpp
-//
-// Demo of std::reduce()
-//
-// Build
-//  cl /EHsc /nologo /std:c++17 /W4 /I %CPP_WORKSPACE%\_Deps\Catch2 reduce.cpp
+// Usage of std::reduce()
 
 #define CATCH_CONFIG_MAIN
-#include <catch.hpp>
+#include <catch2/catch.hpp>
 
 #include <vector>
 #include <numeric>
 #include <algorithm>
 
+// really just std::count_if()
 template <typename Iter, typename T>
-auto equal_to(Iter beg, Iter end, T const& val) -> int
+auto equal_to(Iter beg, Iter end, T const& val) -> std::size_t
 {
     return std::reduce(beg, end, 0, 
         [val](auto a, auto b){ return a + (b == val); });
 }
 
-TEST_CASE("std::reduce()")
+TEST_CASE("std::reduce() behaves similarly to std::accumulate, but we can omit the initializer")
 {
-    auto c = std::vector<int>{2, 3, 4, 3, 4, 6, 3};
+    auto v = std::vector<int>(10);
+    std::iota(v.begin(), v.end(), 0);
 
-    int count = equal_to(c.begin(), c.end(), 3);
-
-    REQUIRE(count == 3);
+    auto const r = std::reduce(v.cbegin(), v.cend());
+    REQUIRE(r == 45);
 }

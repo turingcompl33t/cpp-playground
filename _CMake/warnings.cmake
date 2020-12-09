@@ -84,3 +84,4 @@ target_compile_options(warnings INTERFACE ${PROJECT_WARNINGS})
 
 # and (for now) just sneak this c++20 requirement in here
 target_compile_features(warnings INTERFACE cxx_std_20)
+set(CMAKE_CXX_FLAGS "-std=c++2a")
