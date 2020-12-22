@@ -2,7 +2,7 @@
 
 cmake_minimum_required(VERSION 3.17)
 
-project(container-perf CXX)
+project(allocators CXX)
 
 include("../_CMake/benchmark.cmake")
 include("../_CMake/warnings.cmake")

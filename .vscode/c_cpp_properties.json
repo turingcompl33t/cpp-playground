@@ -8,9 +8,23 @@
             "_Deps/catch2/include",
             "_Deps/expected/include",
             "_Deps/benchmark/include",
-            "_Deps/cdl/include"
+            "_Deps/rangev3/include"
         ],
         "compilerPath": "/usr/bin/gcc",
+        "cStandard": "c11",
+        "cppStandard": "c++20"
+      },
+      {
+        "name": "Win32",
+        "intelliSenseMode": "msvc-x64",
+        "includePath": [
+            "${workspaceFolder}/**", 
+            "_Deps/catch2/include",
+            "_Deps/expected/include",
+            "_Deps/benchmark/include",
+            "_Deps/rangev3/include"
+        ],
+        "compilerPath": "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.26.28801\\bin\\Hostx64\\x64\\cl.exe",
         "cStandard": "c11",
         "cppStandard": "c++20"
       }

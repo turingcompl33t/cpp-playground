@@ -10,7 +10,7 @@
 option(WARNINGS_AS_ERRORS "Treat warnings as errors" ON)
 
 set(MSVC_WARNINGS
-    /W4 # Baseline reasonable warnings
+    /W4     # Baseline reasonable warnings
     /w14242 # 'identifier': conversion from 'type1' to 'type1', possible loss of data
     /w14254 # 'operator': conversion from 'type1:field_bits' to 'type2:field_bits', possible loss of data
     /w14263 # 'function': member function does not override any base class virtual member function
@@ -33,6 +33,7 @@ set(MSVC_WARNINGS
     /w14906 # string literal cast to 'LPWSTR'
     /w14928 # illegal copy-initialization; more than one user-defined conversion has been implicitly applied
     /permissive- # standards conformance mode for MSVC compiler.
+    /EHsc   # exception support
 )
 
 set(CLANG_WARNINGS
@@ -70,18 +71,21 @@ set(GCC_WARNINGS
 add_library(warnings INTERFACE)
 
 if(MSVC)
+    set(PROJECT_STANDARD "/std:c++latest")
     set(PROJECT_WARNINGS ${MSVC_WARNINGS})
-elseif(CMAKE_CXX_COMPILER_ID MATCHES ".*Clang")
+elseif(CMAKE_CXX_COMPILER_ID MATCHES ".*Clang")    
+    set(PROJECT_STANDARD "-std=c++2a")
     set(PROJECT_WARNINGS ${CLANG_WARNINGS})
 elseif(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+    set(PROJECT_STANDARD "-std=c++2a")
     set(PROJECT_WARNINGS ${GCC_WARNINGS})
 else()
     message(AUTHOR_WARNING "No compiler warnings set for '${CMAKE_CXX_COMPILER_ID}' compiler.")
 endif()
 
 # set the target warnings
-target_compile_options(warnings INTERFACE ${PROJECT_WARNINGS})
+set(PROJECT_OPTIONS ${PROJECT_STANDARD} ${PROJECT_WARNINGS})
+target_compile_options(warnings INTERFACE ${PROJECT_OPTIONS})
 
 # and (for now) just sneak this c++20 requirement in here
 target_compile_features(warnings INTERFACE cxx_std_20)
-set(CMAKE_CXX_FLAGS "-std=c++2a")
