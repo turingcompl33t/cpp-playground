@@ -7,6 +7,6 @@
 [submodule "_Deps/benchmark"]
 	path = _Deps/benchmark
 	url = git@github.com:google/benchmark.git
-[submodule "_Deps/cdl"]
-	path = _Deps/cdl
-	url = git@github.com:turingcompl33t/cdl.git
+[submodule "_Deps\\rangev3"]
+	path = _Deps\\rangev3
+	url = git@github.com:ericniebler/range-v3.git
