@@ -13,3 +13,6 @@ target_link_libraries(hello warnings Catch2)
 
 add_executable(overload "overload.cpp")
 target_link_libraries(overload warnings Catch2)
+
+add_executable(require1 "require1.cpp")
+target_link_libraries(require1 warnings Catch2)
