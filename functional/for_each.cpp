@@ -26,7 +26,7 @@ public:
         m_sum += e;
     }
 
-    double value()
+    double value() const
     {
         return static_cast<double>(m_sum) / static_cast<double>(m_count);
     }

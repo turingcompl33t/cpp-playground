@@ -1,5 +1,4 @@
 // with.cpp
-//
 // A basic implementation of the maybe monad for std::optional.
 
 #include <cstdlib>
