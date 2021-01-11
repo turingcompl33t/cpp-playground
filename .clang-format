@@ -1,20 +1,23 @@
 Language: Cpp
 AlignTrailingComments: true
-BreakBeforeConceptDeclarations: true
+BraceWrapping: 
+  AfterClass: false
+  AfterControlStatement: false
+  AfterEnum: false
+  AfterFunction: false
+  AfterNamespace: false
+  AfterStruct: false
 BreakConstructorInitializers: BeforeComma
 BreakStringLiterals: true
 FixNamespaceComments: true
+IndentWidth: 2
 PointerAlignment: Left
 SpaceBeforeAssignmentOperators: true
-SpaceBeforeCaseColon: false
 SpaceBeforeCtorInitializerColon: true
-SpaceBeforeParens:ControlStatementsExceptForEachMacros
+SpaceBeforeParens: true
 SpaceBeforeRangeBasedForLoopColon: true
-SpaceInEmptyBlock: false
 SpaceInEmptyParentheses: false
 SpacesBeforeTrailingComments: 2
 SpacesInAngles: false
-SpacesInConditionalStatement: false
 SpacesInParentheses: false
 SpacesInSquareBrackets: false
-Standard: c++20

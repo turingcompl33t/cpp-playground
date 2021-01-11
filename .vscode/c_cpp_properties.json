@@ -10,7 +10,7 @@
             "_Deps/benchmark/include",
             "_Deps/rangev3/include"
         ],
-        "compilerPath": "/usr/bin/gcc",
+        "compilerPath": "/usr/bin/g++",
         "cStandard": "c11",
         "cppStandard": "c++20"
       },

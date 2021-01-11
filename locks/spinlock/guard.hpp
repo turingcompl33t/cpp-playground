@@ -4,28 +4,30 @@
 #ifndef GUARD_HPP
 #define GUARD_HPP
 
-template <typename LockType>
-class guard
-{
-    LockType& lock;
-
-public:
-    explicit guard(LockType& lock_)
-        : lock{lock_}
-    {
-        lock.acquire();
-    }
-
-    ~guard()
-    {
-        lock.release();
-    }
-
-    guard(guard const&)            = delete;
-    guard& operator=(guard const&) = delete;
-
-    guard(guard&&)            = delete;
-    guard& operator=(guard&&) = delete;
+// weak but fun "lockable" concept;
+// constrain all the things!
+template <typename Lock>
+concept Lockable = requires(Lock lock) {
+  { lock.acquire() };
+  { lock.release() }; 
 };
 
-#endif // GUARD_HPP
+template <Lockable LockType> class guard {
+  LockType& lock;
+
+public:
+  explicit guard(LockType& lock_)
+      : lock{lock_} {
+    lock.acquire();
+  }
+
+  ~guard() { lock.release(); }
+
+  guard(guard const&) = delete;
+  guard& operator=(guard const&) = delete;
+
+  guard(guard&&) = delete;
+  guard& operator=(guard&&) = delete;
+};
+
+#endif  // GUARD_HPP

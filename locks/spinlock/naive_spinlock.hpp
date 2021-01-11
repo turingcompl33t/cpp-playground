@@ -6,35 +6,28 @@
 
 #include <atomic>
 
-class naive_spinlock
-{
-    std::atomic_flag locked{};
+class naive_spinlock {
+  std::atomic_flag locked{};
 
 public:
-    constexpr naive_spinlock()
-        : locked{}
-    {}
+  constexpr naive_spinlock()
+      : locked{} {}
 
-    ~naive_spinlock() = default;
+  ~naive_spinlock() = default;
 
-    naive_spinlock(naive_spinlock const&)            = delete;
-    naive_spinlock& operator=(naive_spinlock const&) = delete;
+  naive_spinlock(naive_spinlock const&) = delete;
+  naive_spinlock& operator=(naive_spinlock const&) = delete;
 
-    naive_spinlock(naive_spinlock&&)            = delete;
-    naive_spinlock& operator=(naive_spinlock&&) = delete;
+  naive_spinlock(naive_spinlock&&) = delete;
+  naive_spinlock& operator=(naive_spinlock&&) = delete;
 
-    void acquire()
-    {
-        while (locked.test_and_set(std::memory_order_acquire))
-        {
-            ; 
-        }
+  auto acquire() -> void {
+    while (locked.test_and_set(std::memory_order_acquire)) {
+      ;
     }
+  }
 
-    void release()
-    {
-        locked.clear(std::memory_order_release);
-    }
+  auto release() -> void { locked.clear(std::memory_order_release); }
 };
 
-#endif // NAIVE_SPINLOCK_HPP
+#endif  // NAIVE_SPINLOCK_HPP
