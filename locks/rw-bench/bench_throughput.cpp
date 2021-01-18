@@ -2,8 +2,8 @@
 // Benchmarking throughput for reader-writer lock implementations.
 
 #include <chrono>
-#include <cstdlib>
 #include <cstdio>
+#include <cstdlib>
 #include <numeric>
 #include <thread>
 #include <vector>
@@ -84,13 +84,11 @@ auto run_one_iteration(std::size_t const n_writers, std::size_t const n_readers)
   return time.count();
 }
 
-
-template <typename LockType, typename Callback> 
+template <typename LockType, typename Callback>
 auto bench_throughput(Callback&& with_results) -> void {
   std::vector<result_t> results{};
   results.reserve(PROPS.size());
-  for (auto n_workers = MIN_WORKERS; n_workers <= MAX_WORKERS;
-       ++n_workers) {
+  for (auto n_workers = MIN_WORKERS; n_workers <= MAX_WORKERS; ++n_workers) {
     for (const auto prop : PROPS) {
       auto const n_writers = std::max(
           static_cast<std::size_t>(static_cast<double>(n_workers) * prop), 1UL);
@@ -114,13 +112,13 @@ auto bench_throughput(Callback&& with_results) -> void {
     }
   }
 
-  with_results(results);
+  std::forward<Callback>(with_results)(results);
 }
 
-auto dump_results(std::vector<result_t>const &results) -> void {
+auto dump_results(std::vector<result_t> const& results) -> void {
   for (const auto& [n, prop, duration] : results) {
     // compute the total number of acquire/release operations performed
-    auto const total_work = n*REPS_PER_WORKER;
+    auto const total_work = n * REPS_PER_WORKER;
     auto const throughput = static_cast<duration_t::rep>(total_work) / duration;
     printf("%zu,%f,%ld,%ld\n", n, prop, duration, throughput);
   }

@@ -3,8 +3,8 @@
 
 #include <array>
 #include <chrono>
-#include <cstdlib>
 #include <cstdio>
+#include <cstdlib>
 #include <future>
 #include <numeric>
 #include <thread>
@@ -28,7 +28,8 @@ constexpr static std::array PROPS{0.1, 0.5};
 
 using duration_t = std::chrono::microseconds;
 
-using result_t = std::tuple<std::size_t, double, duration_t::rep, duration_t::rep>;
+using result_t =
+    std::tuple<std::size_t, double, duration_t::rep, duration_t::rep>;
 
 auto report_progress(std::size_t const count, std::size_t const total) -> void {
   fprintf(stderr, "Completed %zu/%zu\n", count, total);
@@ -116,16 +117,15 @@ auto run_one_iteration(std::size_t const n_writers, std::size_t const n_readers)
   return std::make_pair(w_avg, r_avg);
 }
 
-template <typename LockType, typename Callback> 
+template <typename LockType, typename Callback>
 auto bench_latency(Callback&& with_results) -> void {
   std::vector<result_t> results{};
-  results.reserve((MAX_WORKERS - MIN_WORKERS + 1)*PROPS.size());
+  results.reserve((MAX_WORKERS - MIN_WORKERS + 1) * PROPS.size());
 
   auto count = 0UL;
   auto const total = (MAX_WORKERS - MIN_WORKERS + 1) * PROPS.size();
 
-  for (auto n_workers = MIN_WORKERS; n_workers <= MAX_WORKERS;
-       n_workers += 1) {
+  for (auto n_workers = MIN_WORKERS; n_workers <= MAX_WORKERS; n_workers += 1) {
     for (auto const prop : PROPS) {
       auto const n_writers = std::max(
           static_cast<std::size_t>(static_cast<double>(n_workers) * prop), 1UL);
@@ -156,7 +156,7 @@ auto bench_latency(Callback&& with_results) -> void {
     }
   }
 
-  with_results(results);
+  std::forward<Callback>(with_results)(results);
 }
 
 auto dump_results(std::vector<result_t> const& results) -> void {
