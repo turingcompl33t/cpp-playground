@@ -1,4 +1,4 @@
-// bench_latency.cpp
+// bench.cpp
 // Benchmarking the worst-case latency for spinlock acquire operations.
 //
 // Benchmark setup inspried by blog post by Malte Skarupke:
@@ -12,11 +12,10 @@
 #include <thread>
 #include <vector>
 
-#include "fast_spinlock.hpp"
-#include "naive_spinlock.hpp"
-#include "tatas_spinlock.hpp"
-#include "ticket_spinlock.hpp"
-#include "yielding_spinlock.hpp"
+#include "lib/fast_spinlock.hpp"
+#include "lib/naive_spinlock.hpp"
+#include "lib/tatas_spinlock.hpp"
+#include "lib/yielding_spinlock.hpp"
 
 // the number of maximum latency values we print
 // at the conclusion of the benchmark for each lock type
@@ -131,10 +130,6 @@ int main() {
   std::cout << "fast_spinlock:\n\t";
   print_top_n_latencies(N_LATENCIES_TO_PRINT,
                         latencies_for_lock<fast_spinlock>(n_threads));
-
-  std::cout << "ticket_spinlock:\n\t";
-  print_top_n_latencies(N_LATENCIES_TO_PRINT,
-                        latencies_for_lock<ticket_spinlock>(n_threads));
 
   return EXIT_SUCCESS;
 }

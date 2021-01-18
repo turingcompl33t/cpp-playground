@@ -8,7 +8,8 @@
             "_Deps/catch2/include",
             "_Deps/expected/include",
             "_Deps/benchmark/include",
-            "_Deps/rangev3/include"
+            "_Deps/rangev3/include",
+            "/usr/include"
         ],
         "compilerPath": "/usr/bin/g++",
         "cStandard": "c11",

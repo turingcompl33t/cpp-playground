@@ -7,12 +7,12 @@
 #include <thread>
 #include <vector>
 
-#include "fast_spinlock.hpp"
-#include "guard.hpp"
-#include "naive_spinlock.hpp"
-#include "tatas_spinlock.hpp"
-#include "ticket_spinlock.hpp"
-#include "yielding_spinlock.hpp"
+#include "lib/fast_spinlock.hpp"
+#include "lib/guard.hpp"
+#include "lib/naive_spinlock.hpp"
+#include "lib/tatas_spinlock.hpp"
+#include "lib/ticket_spinlock.hpp"
+#include "lib/yielding_spinlock.hpp"
 
 constexpr static auto const N_THREADS = 16ul;
 constexpr static auto const OPS_PER_THREAD = 1'000ul;
