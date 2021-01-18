@@ -3,7 +3,7 @@
 
 #include <chrono>
 #include <cstdlib>
-#include <iostream>
+#include <cstdio>
 #include <numeric>
 #include <thread>
 #include <vector>
@@ -17,15 +17,20 @@ constexpr static auto const WORK_LOOP = 100UL;
 // the number of lock acquire operations performed by each worker
 constexpr static auto const REPS_PER_WORKER = 1000UL;
 
+// the number of benchmark iterations performed for each configuration
 constexpr static auto const ITERS_PER_CONFIG = 100UL;
 
 // proportion of writer workers
-constexpr static std::array PROPS{0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9};
+// NOTE: only testing 0.1 and 0.5 writer proportions here
+constexpr static std::array PROPS{0.1, 0.5};
 
+// range of total worker threads running in a given benchmark
 constexpr static auto const MIN_WORKERS = 2UL;
 constexpr static auto const MAX_WORKERS = 64UL;
 
 using duration_t = std::chrono::milliseconds;
+
+using result_t = std::tuple<std::size_t, double, duration_t::rep>;
 
 auto work() -> void {
   for (auto i = 0UL; i < WORK_LOOP; ++i) {
@@ -79,9 +84,13 @@ auto run_one_iteration(std::size_t const n_writers, std::size_t const n_readers)
   return time.count();
 }
 
-template <typename LockType> auto bench_throughput() -> void {
+
+template <typename LockType, typename Callback> 
+auto bench_throughput(Callback&& with_results) -> void {
+  std::vector<result_t> results{};
+  results.reserve(PROPS.size());
   for (auto n_workers = MIN_WORKERS; n_workers <= MAX_WORKERS;
-       n_workers <<= 1) {
+       ++n_workers) {
     for (const auto prop : PROPS) {
       auto const n_writers = std::max(
           static_cast<std::size_t>(static_cast<double>(n_workers) * prop), 1UL);
@@ -100,14 +109,25 @@ template <typename LockType> auto bench_throughput() -> void {
       auto const avg = std::accumulate(durations.cbegin(), durations.cend(),
                                        duration_t::rep{}) /
                        static_cast<duration_t::rep>(ITERS_PER_CONFIG);
-      std::cout << "N_WORKERS: " << n_workers << " PROP: " << prop
-                << " DURATION: " << avg << "ms" << std::endl;
+
+      results.emplace_back(n_workers, prop, avg);
     }
+  }
+
+  with_results(results);
+}
+
+auto dump_results(std::vector<result_t>const &results) -> void {
+  for (const auto& [n, prop, duration] : results) {
+    // compute the total number of acquire/release operations performed
+    auto const total_work = n*REPS_PER_WORKER;
+    auto const throughput = static_cast<duration_t::rep>(total_work) / duration;
+    printf("%zu,%f,%ld,%ld\n", n, prop, duration, throughput);
   }
 }
 
 auto main() -> int {
-  bench_throughput<std::shared_mutex>();
-  bench_throughput<tbb::reader_writer_lock>();
+  bench_throughput<std::shared_mutex>(dump_results);
+  bench_throughput<tbb::reader_writer_lock>(dump_results);
   return EXIT_SUCCESS;
 }

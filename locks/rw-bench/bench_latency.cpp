@@ -1,14 +1,11 @@
 // bench_latency.cpp
 // Benchmarking the average latency for reader-writer lock acquire operations.
-//
-// Benchmark setup inspried by blog post by Malte Skarupke:
-// https://probablydance.com/2019/12/30/measuring-mutexes-spinlocks-and-how-bad-the-linux-scheduler-really-is/
 
 #include <array>
 #include <chrono>
 #include <cstdlib>
+#include <cstdio>
 #include <future>
-#include <iostream>
 #include <numeric>
 #include <thread>
 #include <tuple>
@@ -18,7 +15,7 @@
 #include "lock_helpers.hpp"
 
 constexpr static auto const MIN_WORKERS = 2UL;
-constexpr static auto const MAX_WORKERS = 32UL;
+constexpr static auto const MAX_WORKERS = 64UL;
 
 // the number of lock acquire operations performed by each worker
 constexpr static auto const REPS_PER_WORKER = 1000UL;
@@ -27,9 +24,15 @@ constexpr static auto const REPS_PER_WORKER = 1000UL;
 constexpr static auto const ITERS_PER_CONFIG = 100UL;
 
 // proportion of writer workers
-constexpr static std::array PROPS{0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9};
+constexpr static std::array PROPS{0.1, 0.5};
 
 using duration_t = std::chrono::microseconds;
+
+using result_t = std::tuple<std::size_t, double, duration_t::rep, duration_t::rep>;
+
+auto report_progress(std::size_t const count, std::size_t const total) -> void {
+  fprintf(stderr, "Completed %zu/%zu\n", count, total);
+}
 
 template <typename LockType>
 auto reader(LockType& lock, Latch& latch) -> duration_t::rep {
@@ -113,9 +116,16 @@ auto run_one_iteration(std::size_t const n_writers, std::size_t const n_readers)
   return std::make_pair(w_avg, r_avg);
 }
 
-template <typename LockType> auto bench_latency() -> void {
+template <typename LockType, typename Callback> 
+auto bench_latency(Callback&& with_results) -> void {
+  std::vector<result_t> results{};
+  results.reserve((MAX_WORKERS - MIN_WORKERS + 1)*PROPS.size());
+
+  auto count = 0UL;
+  auto const total = (MAX_WORKERS - MIN_WORKERS + 1) * PROPS.size();
+
   for (auto n_workers = MIN_WORKERS; n_workers <= MAX_WORKERS;
-       n_workers <<= 1) {
+       n_workers += 1) {
     for (auto const prop : PROPS) {
       auto const n_writers = std::max(
           static_cast<std::size_t>(static_cast<double>(n_workers) * prop), 1UL);
@@ -140,14 +150,23 @@ template <typename LockType> auto bench_latency() -> void {
       auto const avg_r = std::accumulate(reader_res.cbegin(), reader_res.cend(),
                                          duration_t::rep{}) /
                          static_cast<duration_t::rep>(ITERS_PER_CONFIG);
-      std::cout << "N_WORKERS: " << n_workers << " PROP: " << prop
-                << " WRITER: " << avg_w << "us"
-                << " READER: " << avg_r << "us" << std::endl;
+
+      results.emplace_back(n_workers, prop, avg_w, avg_r);
+      report_progress(++count, total);
     }
+  }
+
+  with_results(results);
+}
+
+auto dump_results(std::vector<result_t> const& results) -> void {
+  for (const auto& [n, prop, w_avg, r_avg] : results) {
+    printf("%zu,%f,%ld,%ld\n", n, prop, w_avg, r_avg);
   }
 }
 
 auto main() -> int {
-  bench_latency<tbb::reader_writer_lock>();
+  bench_latency<std::shared_mutex>(dump_results);
+  bench_latency<tbb::reader_writer_lock>(dump_results);
   return EXIT_SUCCESS;
 }
