@@ -33,6 +33,16 @@ auto push_back() -> void {
   REQUIRE(v.Size() == 2);
 }
 
+auto at() -> void {
+  auto v = BitVector();
+
+  v.PushBack(true);
+  v.PushBack(false);
+
+  REQUIRE(v.At(0));
+  REQUIRE(!v.At(1));
+}
+
 auto read_values() -> void {
   auto v = BitVector();
 
@@ -89,6 +99,8 @@ auto main() -> int {
   construction();
   // Values can be added
   push_back();
+  // Values can be read with at()
+  at();
   // Values can be read
   read_values();
   // Values can be written

@@ -196,6 +196,20 @@ public:
   auto Capacity() const -> std::size_t { return capacity_; }
 
   /**
+   * @brief Get the value at the specified index.
+   * @param index The index of interest
+   * @return The boolean value
+   */
+  auto At(std::size_t index) const -> bool {
+    if (index >= size_) {
+      throw std::out_of_range("Index out of range.");
+    }
+    ASSERT(index < size_, "Broken precondition.");
+    const auto mask = 1UL << index % sizeof(BitType);
+    return storage_[index / sizeof(BitType)] & mask;
+  }
+
+  /**
    * @brief Push a new value onto the vector.
    * @param val The boolean value
    */
